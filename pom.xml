@@ -8,7 +8,7 @@
     <version>2.1.8.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.dsousa</groupId>
+  <groupId>com.junio</groupId>
   <artifactId>minhasfinancas</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>minhasfinancas</name>

@@ -1,4 +1,4 @@
-package com.dsousa.minhasfinancas;
+package com.junio.minhasfinancas;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
