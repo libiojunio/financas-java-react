@@ -1,4 +1,4 @@
-package com.junio.minhasfinancas.model.entity;
+package com.junio.minhasfinancas.model.enums;
 
 public enum StatusLancamento {
   PENDENTE,

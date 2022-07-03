@@ -1,5 +1,7 @@
 package com.junio.minhasfinancas.model.entity;
 
+import com.junio.minhasfinancas.model.enums.StatusLancamento;
+import com.junio.minhasfinancas.model.enums.TipoLancamento;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
