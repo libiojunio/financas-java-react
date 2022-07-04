@@ -13,6 +13,7 @@ import java.util.Objects;
 @ToString
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Usuario {
 
   @Id

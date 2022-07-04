@@ -18,6 +18,7 @@ import java.util.Objects;
 @ToString
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Lancamento {
 
   @Id
