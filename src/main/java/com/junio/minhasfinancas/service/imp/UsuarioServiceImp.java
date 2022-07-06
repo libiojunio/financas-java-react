@@ -1,5 +1,6 @@
 package com.junio.minhasfinancas.service.imp;
 
+import com.junio.minhasfinancas.exception.ErroAutenticacao;
 import com.junio.minhasfinancas.exception.RegraNegocioException;
 import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.model.repository.UsuarioRepository;
@@ -8,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class UsuarioServiceImp implements UsuarioService {
@@ -31,8 +29,17 @@ public class UsuarioServiceImp implements UsuarioService {
    */
   @Override
   public Usuario autenticar(String email, String senha) {
-    List<String> strings = new ArrayList<>();
-    return null;
+    Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+    if (!usuario.isPresent()) {
+      throw new ErroAutenticacao("Usuário não encontrado");
+    }
+    if (!usuario.get().getEmail().equals(email)) {
+      throw new ErroAutenticacao("email inválido");
+    }
+    if (!usuario.get().getSenha().equals(senha)) {
+      throw new ErroAutenticacao("senha inválida");
+    }
+    return usuario.get();
   }
 
   /**
