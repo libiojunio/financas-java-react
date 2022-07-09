@@ -32,4 +32,33 @@ CREATE TABLE financas.lancamento
 ) WITH (
     OIDS=FALSE
 );
+
 ALTER TABLE financas.lancamento OWNER TO postgres
+
+
+-- mysql
+
+CREATE DATABASE financas;
+
+CREATE SCHEMA minhasfinancas;
+
+create table financas.usuario (
+                                  id int not null primary key,
+                                  nome varchar(150),
+                                  email varchar(100),
+                                  senha varchar(20),
+                                  data_cadastro datetime default now()
+)
+
+CREATE TABLE financas.lancamento
+(
+    id int NOT NULL PRIMARY KEY ,
+    descricao varchar(100) NOT NULL,
+    mes int NOT NULL,
+    ano int NOT NULL,
+    valor numeric(16,2) NOT NULL,
+    tipo varchar(20) NOT NULL,
+    status varchar(20) NOT NULL,
+    id_usuario int REFERENCES financas.usuario (id),
+    data_cadastro datetime default now()
+)
