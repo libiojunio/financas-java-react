@@ -4,8 +4,12 @@ import com.junio.minhasfinancas.exception.ErroAutenticacao;
 import com.junio.minhasfinancas.exception.RegraNegocioException;
 import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.model.repository.UsuarioRepository;
+import com.junio.minhasfinancas.service.imp.UsuarioServiceImp;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -24,10 +28,15 @@ public class UsuarioServiceTest {
   @Autowired
   UsuarioRepository usuarioRepository;
 
+  @Before
+  public void setUp() {
+    usuarioRepository = Mockito.mock(UsuarioRepository.class);
+    usuarioService = new UsuarioServiceImp(usuarioRepository);
+  }
+
   @Test(expected = Test.None.class)
   public void deveValidarEmail(){
-    //cenário
-    usuarioRepository.deleteAll();
+    Mockito.when(usuarioRepository.existsByEmail(Mockito.anyString())).thenReturn(false);
     usuarioService.validarEmail("libio@libio.com.br");
   }
 
@@ -41,7 +50,8 @@ public class UsuarioServiceTest {
   @Test(expected = Test.None.class)
   public void testarSalvarUsuario(){
     Usuario usuario = povoadorUsuario();
-    usuarioService.salvarUsuario(usuario);
+    usuario = usuarioService.salvarUsuario(usuario);
+    Assertions.assertEquals(true, usuario.getId() != null);
   }
 
   private Usuario povoadorUsuario(){
