@@ -32,6 +32,9 @@ public class Lancamento {
   @Column(name="ano")
   private Integer ano;
 
+  @Column(name = "descricao")
+  private String descricao;
+
   @ManyToOne
   @JoinColumn(name = "id_usuario")
   private Usuario usuario;
@@ -45,7 +48,7 @@ public class Lancamento {
 
   @Column(name = "tipo")
   @Enumerated(EnumType.STRING)
-  private TipoLancamento tipoLancamento;
+  private TipoLancamento tipo;
 
   @Column(name = "status")
   @Enumerated(EnumType.STRING)

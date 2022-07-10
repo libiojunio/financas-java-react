@@ -1,10 +1,9 @@
 package com.junio.minhasfinancas.service;
 
-import com.junio.minhasfinancas.exception.ErroAutenticacao;
-import com.junio.minhasfinancas.exception.RegraNegocioException;
 import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.model.repository.UsuarioRepository;
 import com.junio.minhasfinancas.service.imp.UsuarioServiceImp;
+import com.junio.minhasfinancas.service.interfaces.UsuarioService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;

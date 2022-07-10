@@ -4,7 +4,8 @@ import com.junio.minhasfinancas.exception.ErroAutenticacao;
 import com.junio.minhasfinancas.exception.RegraNegocioException;
 import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.model.repository.UsuarioRepository;
-import com.junio.minhasfinancas.service.UsuarioService;
+import com.junio.minhasfinancas.service.interfaces.UsuarioService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.junio.minhasfinancas.service;
+package com.junio.minhasfinancas.service.interfaces;
 
 import com.junio.minhasfinancas.model.entity.Usuario;
 
