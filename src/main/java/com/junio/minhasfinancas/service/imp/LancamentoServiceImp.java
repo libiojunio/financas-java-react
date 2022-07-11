@@ -117,4 +117,13 @@ public class LancamentoServiceImp implements LancamentoService {
       throw new RegraNegocioException("Informe um tipo válido!");
     }
   }
+
+  /**
+   * @param id
+   * @return
+   */
+  @Override
+  public Optional<Lancamento> findById(Long id) {
+    return lancamentoRepository.findById(id);
+  }
 }

@@ -43,16 +43,16 @@ CREATE DATABASE financas;
 CREATE SCHEMA minhasfinancas;
 
 create table financas.usuario (
-                                  id int not null primary key,
-                                  nome varchar(150),
-                                  email varchar(100),
-                                  senha varchar(20),
-                                  data_cadastro datetime default now()
+    id int not null primary key AUTO_INCREMENT,
+    nome varchar(150),
+    email varchar(100),
+    senha varchar(20),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
 CREATE TABLE financas.lancamento
 (
-    id int NOT NULL PRIMARY KEY ,
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     descricao varchar(100) NOT NULL,
     mes int NOT NULL,
     ano int NOT NULL,
@@ -60,5 +60,5 @@ CREATE TABLE financas.lancamento
     tipo varchar(20) NOT NULL,
     status varchar(20) NOT NULL,
     id_usuario int REFERENCES financas.usuario (id),
-    data_cadastro datetime default now()
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )

@@ -61,7 +61,21 @@ public class UsuarioServiceImp implements UsuarioService {
   public void validarEmail(String email) {
     boolean existe = usuarioRepository.existsByEmail(email);
     if (existe) {
-      throw new RegraNegocioException("Já existe um usuario cadastrado com esse email.");
+      throw new RegraNegocioException("Já existe um usuário cadastrado com esse email.");
     }
   }
+
+  /**
+   * @param id
+   * @return
+   */
+  @Override
+  public Optional<Usuario> findById(Long id) {
+    if (id != null) {
+      return usuarioRepository.findById(id);
+    }
+    throw new RegraNegocioException("Id do usuário invalido ou vazio.");
+  }
+
+
 }
