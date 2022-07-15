@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -117,5 +118,44 @@ public class LancamentoResource {
       lancamento.setStatusLancamento(StatusLancamento.valueOf(lancamentoForm.getStatus()));
     }
     return lancamento;
+  }
+
+  @PutMapping("{id}/atualizarstatus")
+  public ResponseEntity atualizarStatus(@PathVariable("id") Long id, @RequestBody LancamentoForm lancamentoForm){
+    Optional<Lancamento> optiLancamento = lancamentoService.findById(id);
+    if (optiLancamento.isPresent()) {
+      Lancamento lancamento = optiLancamento.get();
+      if (lancamentoForm.getStatus() != null) {
+        lancamento.setStatusLancamento(StatusLancamento.valueOf(lancamentoForm.getStatus()));
+        lancamentoService.atualizar(lancamento);
+      }
+      return ResponseEntity.ok(lancamento);
+    }
+    return ResponseEntity.badRequest().body("Usuário não existe!");
+  }
+
+  @GetMapping("{id}/saldo")
+  public ResponseEntity saldo (@PathVariable("id") Long id){
+    Optional<Usuario> usuario = usuarioService.findById(id);
+    Lancamento lancamentoFilter = new Lancamento();
+
+    if (usuario.isPresent()) {
+      BigDecimal receita = BigDecimal.ZERO;
+      BigDecimal despesa = BigDecimal.ZERO;
+      lancamentoFilter.setUsuario(usuario.get());
+      List<Lancamento> lancamentoList = lancamentoService.buscar(lancamentoFilter);
+
+      for (Lancamento lancamento : lancamentoList) {
+        if (lancamento.getTipo().equals(TipoLancamento.RECEITA)) {
+          receita = receita.add(lancamento.getValor());
+        }
+        else {
+          despesa = despesa.add(lancamento.getValor());
+        }
+      }
+      return ResponseEntity.ok(receita.subtract(despesa));
+    }
+
+    return ResponseEntity.badRequest().body("Usuário não encontrado.");
   }
 }

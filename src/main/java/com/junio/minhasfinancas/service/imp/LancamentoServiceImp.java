@@ -1,15 +1,11 @@
 package com.junio.minhasfinancas.service.imp;
 
-import com.junio.minhasfinancas.exception.ErroAutenticacao;
 import com.junio.minhasfinancas.exception.RegraNegocioException;
 import com.junio.minhasfinancas.model.entity.Lancamento;
-import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.model.enums.StatusLancamento;
+import com.junio.minhasfinancas.model.enums.TipoLancamento;
 import com.junio.minhasfinancas.model.repository.LancamentoRepository;
-import com.junio.minhasfinancas.model.repository.UsuarioRepository;
 import com.junio.minhasfinancas.service.interfaces.LancamentoService;
-import com.junio.minhasfinancas.service.interfaces.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;

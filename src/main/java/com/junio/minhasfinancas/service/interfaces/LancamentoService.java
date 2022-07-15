@@ -4,6 +4,7 @@ import com.junio.minhasfinancas.model.entity.Lancamento;
 import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.model.enums.StatusLancamento;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
