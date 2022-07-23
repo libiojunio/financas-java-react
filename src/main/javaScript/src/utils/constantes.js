@@ -12,5 +12,5 @@ export const rotaLancamentos = '/cadastro-rotaLancamentos';
 export const rotaLogin = '/login';
 
 export const urlBase = 'http://localhost:8080/'
-
-export const urlAutenticar = urlBase + 'api/usuarios/autenticar';
+export const urlAutenticar = `${urlBase}api/usuarios/autenticar`;
+export const urlSaldoUsuario = `${urlBase}api/lancamentos`;

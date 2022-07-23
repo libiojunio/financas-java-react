@@ -4,7 +4,7 @@ import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
-import {styleLink, urlAutenticar} from '../../constantes/constantes';
+import {styleLink, urlAutenticar} from '../../utils/constantes';
 import axios from 'axios';
 
 class Login extends React.Component {

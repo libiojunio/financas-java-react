@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {marginRight5px, rotaCadastroUsuarios, rotaLancamentos} from '../../constantes/constantes';
+import {marginRight5px, rotaCadastroUsuarios, rotaLancamentos, urlSaldoUsuario} from '../../utils/constantes';
+import axios from 'axios';
 
 class Home extends React.Component {
   constructor(props) {
@@ -9,7 +10,13 @@ class Home extends React.Component {
       saldo: 0,
     };
   }
-
+  
+  componentDidMount() {
+    axios.get(`${urlSaldoUsuario}/1/saldo`).then((response) => {
+      this.setState({saldo: response.data})
+    });
+  }
+  
   render() {
 
     return (

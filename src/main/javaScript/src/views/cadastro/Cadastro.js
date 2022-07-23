@@ -4,7 +4,7 @@ import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
-import {styleLink} from '../../constantes/constantes';
+import {styleLink} from '../../utils/constantes';
 
 class Cadastro extends React.Component {
   constructor(props) {
