@@ -35,9 +35,6 @@ class Login extends React.Component {
     const state = this.state;
     state[value.target.id] = value.target.value;
     this.setState(state);
-
-    console.log('value', value.target.id);
-    console.log('state', this.state);
   }
 
   render() {
@@ -49,22 +46,20 @@ class Login extends React.Component {
     return (
       <Container tipo={'bsDocs'}>
          <Card titulo={'Login'}>
-           <form>
-             <fieldset>
-               <FormGroup label={'Email: *'} htmlFor={idEmail}>
-                 <input
-                   type="email" className="form-control" id={idEmail} onChange={this.onChange}
-                   aria-describedby="emailHelp" placeholder="Digite o email" value={this.state.inputEmail} />
-               </FormGroup>
-               <FormGroup label={'Senha: *'} htmlFor={idSenha}>
-                 <input
-                   type="password" className="form-control" id={idSenha} onChange={this.onChange}
-                   placeholder="Digite a senha" value={this.state.inputSenha}/>
-               </FormGroup>
-               <Button onClick={this.entrar} descricao={'Entrar'} className={'btn btn-success'}/>
-               <Button descricao={descricaoCadastrar} className={'btn btn-danger'}/>
-             </fieldset>
-           </form>
+           <fieldset>
+             <FormGroup label={'Email: *'} htmlFor={idEmail}>
+               <input
+                 type="email" className="form-control" id={idEmail} onChange={this.onChange}
+                 aria-describedby="emailHelp" placeholder="Digite o email" value={this.state.inputEmail} />
+             </FormGroup>
+             <FormGroup label={'Senha: *'} htmlFor={idSenha}>
+               <input
+                 type="password" className="form-control" id={idSenha} onChange={this.onChange}
+                 placeholder="Digite a senha" value={this.state.inputSenha}/>
+             </FormGroup>
+             <Button onClick={this.entrar} descricao={'Entrar'} className={'btn btn-success'}/>
+             <Button descricao={descricaoCadastrar} className={'btn btn-danger'}/>
+           </fieldset>
          </Card>
       </Container>
     )
