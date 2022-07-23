@@ -5,6 +5,7 @@ import FormGroup from '../../componentes/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
 import {styleLink} from '../../utils/constantes';
+import {withRouter} from '../../componentes/withRouter';
 
 class Cadastro extends React.Component {
   constructor(props) {
@@ -70,4 +71,4 @@ class Cadastro extends React.Component {
   }
 }
 
-export default Cadastro;
+export default withRouter(Cadastro);

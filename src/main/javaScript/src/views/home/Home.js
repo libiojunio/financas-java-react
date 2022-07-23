@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {marginRight5px, rotaCadastroUsuarios, rotaLancamentos, urlSaldoUsuario} from '../../utils/constantes';
 import axios from 'axios';
+import {withRouter} from '../../componentes/withRouter';
 
 class Home extends React.Component {
   constructor(props) {
@@ -12,11 +13,17 @@ class Home extends React.Component {
   }
   
   componentDidMount() {
-    axios.get(`${urlSaldoUsuario}/1/saldo`).then((response) => {
-      this.setState({saldo: response.data})
-    });
+    const _usuario_logado = JSON.parse(localStorage.getItem('_usuario_logado'));
+    if (_usuario_logado && _usuario_logado.id) {
+      axios.get(`${urlSaldoUsuario}/${_usuario_logado.id}/saldo`).then((response) => {
+        this.setState({saldo: response.data})
+      });
+    }
+    else {
+      this.setState({saldo: 0})
+    }
   }
-  
+
   render() {
 
     return (
@@ -41,4 +48,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

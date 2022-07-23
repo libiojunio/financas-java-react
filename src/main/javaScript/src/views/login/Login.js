@@ -4,8 +4,9 @@ import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
-import {styleLink, urlAutenticar} from '../../utils/constantes';
+import {rotaHome, styleLink, urlAutenticar} from '../../utils/constantes';
 import axios from 'axios';
+import {withRouter} from '../../componentes/withRouter';
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,9 +26,11 @@ class Login extends React.Component {
       email: this.state.inputEmail,
       senha: this.state.inputSenha
     }).then((response) => {
-      console.log('response', response);
+      console.log('response', response.data);
+      localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+      this.props.navigate(rotaHome)
     }).catch((error) => {
-      console.log('error', error.response);
+      console.log('error', this.props);
     });
   }
 
@@ -66,4 +69,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
