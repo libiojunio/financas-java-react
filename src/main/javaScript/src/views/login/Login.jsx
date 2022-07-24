@@ -4,11 +4,12 @@ import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
-import {rotaHome, styleLink } from '../../utils/constantes';
+import {ROTA_HOME, STYLE_LINK } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import usuarioService from '../../services/usuario/UsuarioService';
 import LocalStorageService from '../../services/outros/LocalStorageService';
 import {exibirMensagemErro, exibirMensagemSucesso} from '../../componentes/toastr';
+import {USUARIO_AUTENTICADO_COM_SUCESSO} from '../../utils/mensagens';
 
 class Login extends React.Component {
 
@@ -33,8 +34,8 @@ class Login extends React.Component {
     };
     this.usuarioService.autenticar(emailSenha).then((response) => {
       LocalStorageService.setItem('_usuario_logado', JSON.stringify(response.data))
-      exibirMensagemSucesso('Usuario autenticado com sucesso!')
-      this.props.navigate(rotaHome)
+      exibirMensagemSucesso(USUARIO_AUTENTICADO_COM_SUCESSO)
+      this.props.navigate(ROTA_HOME)
     }).catch((error) => {
       exibirMensagemErro(error.response.data);
     });
@@ -50,7 +51,7 @@ class Login extends React.Component {
     const idEmail = 'inputEmail';
     const idSenha = 'inputSenha';
 
-    const descricaoCadastrar = <Link style={styleLink} to={'/cadastro-usuarios'}>Cadastrar</Link>;
+    const descricaoCadastrar = <Link style={STYLE_LINK} to={'/cadastro-usuarios'}>Cadastrar</Link>;
 
     return (
       <Container tipo={'bsDocs'}>

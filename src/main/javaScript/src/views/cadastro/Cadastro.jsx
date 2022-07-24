@@ -4,7 +4,7 @@ import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
-import {styleLink} from '../../utils/constantes';
+import {STYLE_LINK} from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 
 class Cadastro extends React.Component {
@@ -21,7 +21,7 @@ class Cadastro extends React.Component {
       }
     };
   }
-  
+
   cadastrar = () => {
     console.log('entrei', this.state)
   }
@@ -38,7 +38,7 @@ class Cadastro extends React.Component {
     const idSenha = 'inputSenha';
     const idSenhaRepeticao = 'inputSenhaRepeticao';
 
-    const descricaoCancelar = <Link style={styleLink} to={'/login'}>Cancelar</Link>;
+    const descricaoCancelar = <Link style={STYLE_LINK} to={'/login'}>Cancelar</Link>;
 
     return (
       <Container tipo={'bsDocs'}>
