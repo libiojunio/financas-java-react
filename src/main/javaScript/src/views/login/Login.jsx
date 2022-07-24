@@ -8,6 +8,7 @@ import {rotaHome, styleLink } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import usuarioService from '../../services/usuario/UsuarioService';
 import LocalStorageService from '../../services/outros/LocalStorageService';
+import {exibirMensagemErro, exibirMensagemSucesso} from '../../componentes/toastr';
 
 class Login extends React.Component {
 
@@ -32,9 +33,10 @@ class Login extends React.Component {
     };
     this.usuarioService.autenticar(emailSenha).then((response) => {
       LocalStorageService.setItem('_usuario_logado', JSON.stringify(response.data))
+      exibirMensagemSucesso('Usuario autenticado com sucesso!')
       this.props.navigate(rotaHome)
     }).catch((error) => {
-      console.log('error', error.response);
+      exibirMensagemErro(error.response.data);
     });
   }
 
