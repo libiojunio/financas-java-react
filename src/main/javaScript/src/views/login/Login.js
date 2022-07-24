@@ -7,12 +7,14 @@ import {Link} from 'react-router-dom';
 import {rotaHome, styleLink } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import usuarioService from '../../services/usuario/UsuarioService';
+import LocalStorageService from '../../services/LocalStorageService';
 
 class Login extends React.Component {
 
+  usuarioService = new usuarioService();
+
   constructor(props) {
     super(props);
-    this.usuarioService = new usuarioService();
     this.state = {
       inputEmail: '',
       inputSenha: '',
@@ -29,8 +31,7 @@ class Login extends React.Component {
       senha: this.state.inputSenha
     };
     this.usuarioService.autenticar(emailSenha).then((response) => {
-      console.log('response', response.data);
-      localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+      LocalStorageService.setItem('_usuario_logado', JSON.stringify(response.data))
       this.props.navigate(rotaHome)
     }).catch((error) => {
       console.log('error', error.response);

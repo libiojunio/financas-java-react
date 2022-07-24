@@ -1,21 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {marginRight5px, rotaCadastroUsuarios, rotaLancamentos, urlSaldoUsuario} from '../../utils/constantes';
-import axios from 'axios';
+import {marginRight5px, rotaCadastroUsuarios, rotaLancamentos } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
+import lancamentoService from '../../services/lancamento/LancamentoService';
+import LocalStorageService from '../../services/LocalStorageService';
 
 class Home extends React.Component {
+
+  lancamentoService = new lancamentoService();
+
   constructor(props) {
     super(props);
     this.state = {
       saldo: 0,
     };
   }
-  
+
   componentDidMount() {
-    const _usuario_logado = JSON.parse(localStorage.getItem('_usuario_logado'));
+    const _usuario_logado = LocalStorageService.getItemObj('_usuario_logado');
     if (_usuario_logado && _usuario_logado.id) {
-      axios.get(`${urlSaldoUsuario}/${_usuario_logado.id}/saldo`).then((response) => {
+      this.lancamentoService.obterSaldo(_usuario_logado.id).then((response) => {
         this.setState({saldo: response.data})
       });
     }
