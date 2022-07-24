@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {marginRight5px, rotaCadastroUsuarios, rotaLancamentos } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import lancamentoService from '../../services/lancamento/LancamentoService';
-import LocalStorageService from '../../services/LocalStorageService';
+import LocalStorageService from '../../services/outros/LocalStorageService';
 
 class Home extends React.Component {
 

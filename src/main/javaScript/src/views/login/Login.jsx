@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import {rotaHome, styleLink } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import usuarioService from '../../services/usuario/UsuarioService';
-import LocalStorageService from '../../services/LocalStorageService';
+import LocalStorageService from '../../services/outros/LocalStorageService';
 
 class Login extends React.Component {
 

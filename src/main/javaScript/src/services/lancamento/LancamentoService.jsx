@@ -1,4 +1,4 @@
-import ApiServices from '../ApiServices';
+import ApiServices from '../outros/ApiServices';
 
 class LancamentoService extends ApiServices {
   constructor() {
