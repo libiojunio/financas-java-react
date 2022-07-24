@@ -4,13 +4,15 @@ import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
-import {rotaHome, styleLink, urlAutenticar} from '../../utils/constantes';
-import axios from 'axios';
+import {rotaHome, styleLink } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
+import usuarioService from '../../services/usuario/UsuarioService';
 
 class Login extends React.Component {
+
   constructor(props) {
     super(props);
+    this.usuarioService = new usuarioService();
     this.state = {
       inputEmail: '',
       inputSenha: '',
@@ -20,17 +22,18 @@ class Login extends React.Component {
       }
     };
   }
-  
-  entrar = () => {
-    axios.post(urlAutenticar, {
+
+  autenticar = () => {
+    const emailSenha = {
       email: this.state.inputEmail,
       senha: this.state.inputSenha
-    }).then((response) => {
+    };
+    this.usuarioService.autenticar(emailSenha).then((response) => {
       console.log('response', response.data);
       localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
       this.props.navigate(rotaHome)
     }).catch((error) => {
-      console.log('error', this.props);
+      console.log('error', error.response);
     });
   }
 
@@ -43,7 +46,7 @@ class Login extends React.Component {
   render() {
     const idEmail = 'inputEmail';
     const idSenha = 'inputSenha';
-    
+
     const descricaoCadastrar = <Link style={styleLink} to={'/cadastro-usuarios'}>Cadastrar</Link>;
 
     return (
@@ -60,7 +63,7 @@ class Login extends React.Component {
                  type="password" className="form-control" id={idSenha} onChange={this.onChange}
                  placeholder="Digite a senha" value={this.state.inputSenha}/>
              </FormGroup>
-             <Button onClick={this.entrar} descricao={'Entrar'} className={'btn btn-success'}/>
+             <Button onClick={this.autenticar} descricao={'Entrar'} className={'btn btn-success'}/>
              <Button descricao={descricaoCadastrar} className={'btn btn-danger'}/>
            </fieldset>
          </Card>
