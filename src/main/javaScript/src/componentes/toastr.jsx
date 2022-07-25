@@ -26,6 +26,10 @@ export function exibirMensagemErro(mensagem){
   exibirMensagem(mensagem, 'Erro', 'error')
 }
 
+export function exibirMensagemErroApi(error){
+  exibirMensagem(error.response.data, 'Erro', 'error')
+}
+
 export function exibirMensagemSucesso(mensagem){
   exibirMensagem(mensagem, 'Sucesso', 'success')
 }

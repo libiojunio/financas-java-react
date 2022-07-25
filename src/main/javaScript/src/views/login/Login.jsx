@@ -8,8 +8,8 @@ import {ROTA_HOME, STYLE_LINK } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import usuarioService from '../../services/usuario/UsuarioService';
 import LocalStorageService from '../../services/outros/LocalStorageService';
-import {exibirMensagemErro, exibirMensagemSucesso} from '../../componentes/toastr';
-import {USUARIO_AUTENTICADO_COM_SUCESSO} from '../../utils/mensagens';
+import {exibirMensagemErroApi, exibirMensagemSucesso} from '../../componentes/toastr';
+import {MSG_USUARIO_AUTENTICADO_COM_SUCESSO} from '../../utils/mensagens';
 
 class Login extends React.Component {
 
@@ -34,10 +34,10 @@ class Login extends React.Component {
     };
     this.usuarioService.autenticar(emailSenha).then((response) => {
       LocalStorageService.setItem('_usuario_logado', JSON.stringify(response.data))
-      exibirMensagemSucesso(USUARIO_AUTENTICADO_COM_SUCESSO)
+      exibirMensagemSucesso(MSG_USUARIO_AUTENTICADO_COM_SUCESSO)
       this.props.navigate(ROTA_HOME)
     }).catch((error) => {
-      exibirMensagemErro(error.response.data);
+      exibirMensagemErroApi(error)
     });
   }
 
