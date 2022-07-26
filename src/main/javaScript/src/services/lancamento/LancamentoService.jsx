@@ -19,6 +19,10 @@ class LancamentoService extends ApiServices {
 
     return this.get(`/${usuario}${mes}${ano}${descricao}${tipo}`);
   }
+
+  deletar(url) {
+    return this.delete(url);
+  }
 }
 
 export default LancamentoService;

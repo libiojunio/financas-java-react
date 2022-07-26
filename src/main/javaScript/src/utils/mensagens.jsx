@@ -3,7 +3,7 @@ export const MSG_USUARIO_CADASTRADO_COM_SUCESSO = (nome) => {
   return `O usuário ${nome} foi cadastrado com sucesso, Faça login!`;
 };
 export const MSG_ERRO_CAMPOS_VAZIOS = (campos) => {
-  return `O(s) campo(s) ${campos}. está(ão) vazio(s).`
+  return `O(s) preechimento(s) do(s) campo(s) ${campos} são(é) obrigátorio.`
 };
 export const MSG_SUCCESS_PADRAO = 'Operação realizada com sucesso!';
 

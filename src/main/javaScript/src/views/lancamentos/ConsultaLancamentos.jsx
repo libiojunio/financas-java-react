@@ -50,6 +50,10 @@ class ConsultaLancamentos extends React.Component {
   }
 
   buscar = () => {
+    const msgError = this.validarFormulario();
+    if (msgError) {
+      return exibirMensagemErro(msgError);
+    }
     this.lancamentoService.buscar(this.state.formulario).then((response) => {
       exibirMensagemSucesso(MSG_SUCCESS_PADRAO);
       this.setState({lancamentos: response.data})
@@ -58,10 +62,41 @@ class ConsultaLancamentos extends React.Component {
     });
   }
 
+  deletar = (lancamento) => {
+    this.lancamentoService.deletar(`/${lancamento.id}`).then(() => {
+      const index = this.state.lancamentos.indexOf(lancamento);
+      const state = this.state;
+      state.lancamentos.splice(index, 1);
+      this.setState(state);
+      exibirMensagemSucesso(MSG_SUCCESS_PADRAO);
+    }).catch((error) => {
+      exibirMensagemErroApi(error);
+    });
+  }
+
+  editar = (lancamento) => {
+    // this.lancamentoService;
+  }
+
   onChange = (value) => {
     const state = this.state;
     state.formulario[value.target.id] = value.target.value;
     this.setState(state);
+  }
+
+  validarFormulario = () => {
+    const camposVazios = [];
+    const { formulario } = this.state;
+
+    if (!formulario.ano) {
+      camposVazios.push('Ano')
+    }
+
+    if (camposVazios.length > 0) {
+      return MSG_ERRO_CAMPOS_VAZIOS(formatarArrayDeStrings(camposVazios));
+    }
+
+    return false;
   }
 
   render() {
@@ -75,7 +110,7 @@ class ConsultaLancamentos extends React.Component {
         <Card titulo={'Consultar lançamentos'}>
           <Row>
             <Container>
-              <FormGroup label={'Ano:'} htmlFor={idAno}>
+              <FormGroup label={'Ano:*'} htmlFor={idAno}>
                 <FormSelect defaultValue={this.state.formulario.ano} id={idAno} itens={GET_LISTA_ANOS()} onChange={this.onChange}/>
               </FormGroup>
               <FormGroup label={'Mês:'} htmlFor={idMes}>
@@ -94,7 +129,7 @@ class ConsultaLancamentos extends React.Component {
           </Row>
           <Row>
             <Container>
-              <TableLancamentos lancamentos={this.state.lancamentos}/>
+              <TableLancamentos lancamentos={this.state.lancamentos} deletar={this.deletar} editar={this.editar}/>
             </Container>
           </Row>
         </Card>
