@@ -71,18 +71,18 @@ class ConsultaLancamentos extends React.Component {
         <Card titulo={'Consultar lançamentos'}>
           <Row>
             <Container>
-              <FormGroup label={'Tipo:'} htmlFor={idTipo}>
-                <FormSelect defaultValue={this.state.formulario.tipo} id={idTipo} itens={TIPO_LANCAMENTO} onChange={this.onChange}/>
-              </FormGroup>
               <FormGroup label={'Ano:'} htmlFor={idAno}>
                 <FormSelect defaultValue={this.state.formulario.ano} id={idAno} itens={ANO_SELECT()} onChange={this.onChange}/>
               </FormGroup>
               <FormGroup label={'Mês:'} htmlFor={idMes}>
                 <FormSelect defaultValue={this.state.formulario.mes} id={idMes} itens={MESES_SELECT} onChange={this.onChange}/>
               </FormGroup>
+              <FormGroup label={'Tipo:'} htmlFor={idTipo}>
+                <FormSelect defaultValue={this.state.formulario.tipo} id={idTipo} itens={TIPO_LANCAMENTO} onChange={this.onChange}/>
+              </FormGroup>
               <FormGroup label={'Descrição:'} htmlFor={idDescricao}>
                 <input
-                  type="text" className="form-control" id={idDescricao} name={'descricao'} onChange={this.onChange}
+                  type="text" className="form-control" id={idDescricao} name={idDescricao} onChange={this.onChange}
                   placeholder="Digite a descrição" value={this.state.formulario.descricao} />
               </FormGroup>
               <Button descricao={'Buscar'} className={'btn btn-success'} onClick={this.buscar} />

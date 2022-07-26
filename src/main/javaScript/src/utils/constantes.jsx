@@ -29,7 +29,7 @@ export const ANO_SELECT = () => {
 export const MESES_SELECT = [
   {id: 1, descricao: 'Janeiro'},
   {id: 2, descricao: 'Feverreiro'},
-  {id: 3, descricao: 'Março'},
+  {id: 3, descricao: 'MarÃ§o'},
   {id: 4, descricao: 'Abril'},
   {id: 5, descricao: 'Maio'},
   {id: 6, descricao: 'Junho'},

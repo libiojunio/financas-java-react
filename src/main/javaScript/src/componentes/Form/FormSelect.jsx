@@ -13,7 +13,7 @@ class FormSelect extends React.Component {
               id={this.props.id} name={this.props.id} onChange={this.props.onChange}>
         <option></option>
         {this.props.itens.map((item) => {
-          return <option value={item.id}>{item.descricao}</option>
+          return <option value={item.id} key={item.id}>{item.descricao}</option>
         })}
       </select>
     )
@@ -25,6 +25,7 @@ FormSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
   defaultValue: PropTypes.any.isRequired,
   itens: PropTypes.array.isRequired,
+  placeholder: PropTypes.string,
 };
 
 export default FormSelect;
