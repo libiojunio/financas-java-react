@@ -8,7 +8,7 @@ class Container extends React.Component {
     this.state = {
       style: {
         position: 'relative',
-        left: '300px'
+        minWidth: '515px'
       }
     };
   }
@@ -24,7 +24,7 @@ class Container extends React.Component {
         {this.props.tipo === 'bsDocs' &&
           <div className={'container'}>
             <Row>
-              <div className={'col-md-6'} style={this.state.style}>
+              <div className={'col-md-12'} style={this.state.style}>
                 <div className={'bs-docs-section'}>
                   {this.props.children}
                 </div>

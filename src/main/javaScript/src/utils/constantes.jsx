@@ -13,10 +13,9 @@ export const ROTA_CADASTRO_USUARIOS = '/cadastro-usuarios';
 export const ROTA_CONSULTA_LANCAMENTOS = '/consulta-lancamentos';
 export const ROTA_LOGIN = '/login';
 
-export const ANO_SELECT = () => {
+export const GET_LISTA_ANOS = (anoInicial = 1970, final) => {
   const ano = [];
-  const anoInicial = 1970;
-  const anoFinal = new Date().getFullYear() + 20;
+  const anoFinal = final ? final : new Date().getFullYear() + 20;
   for(let i = anoInicial; i < anoFinal; i++) {
     ano.push({
       id: i,
@@ -26,7 +25,7 @@ export const ANO_SELECT = () => {
   return ano;
 }
 
-export const MESES_SELECT = [
+export const GET_LISTA_OBJETO_MESES = [
   {id: 1, descricao: 'Janeiro'},
   {id: 2, descricao: 'Feverreiro'},
   {id: 3, descricao: 'Março'},
