@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '../../componentes/Container';
 import Card from '../../componentes/Card';
-import FormGroup from '../../componentes/FormGroup';
+import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
 import {REGEX_EMAIL, ROTA_LOGIN, STYLE_LINK} from '../../utils/constantes';

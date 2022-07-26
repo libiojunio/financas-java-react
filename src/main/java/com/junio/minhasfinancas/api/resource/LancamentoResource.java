@@ -6,10 +6,8 @@ import com.junio.minhasfinancas.model.entity.Lancamento;
 import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.model.enums.StatusLancamento;
 import com.junio.minhasfinancas.model.enums.TipoLancamento;
-import com.junio.minhasfinancas.model.repository.UsuarioRepository;
 import com.junio.minhasfinancas.service.interfaces.LancamentoService;
 import com.junio.minhasfinancas.service.interfaces.UsuarioService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -30,6 +28,7 @@ public class LancamentoResource {
 
   @GetMapping
   public ResponseEntity buscar (
+      @RequestParam(value = "tipo", required = false) String tipo,
       @RequestParam(value = "descricao", required = false) String descricao,
       @RequestParam(value = "mes", required = false) Integer mes,
       @RequestParam(value = "ano", required = false) Integer ano,
@@ -39,6 +38,9 @@ public class LancamentoResource {
     lancamentoFilter.setDescricao(descricao);
     lancamentoFilter.setMes(mes);
     lancamentoFilter.setAno(ano);
+    if (tipo != null) {
+      lancamentoFilter.setTipo(TipoLancamento.valueOf(tipo));
+    }
 
    Optional<Usuario> usuario = usuarioService.findById(id);
     if (usuario.isPresent()) {

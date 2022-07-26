@@ -27,7 +27,13 @@ export function exibirMensagemErro(mensagem){
 }
 
 export function exibirMensagemErroApi(error){
-  exibirMensagem(error.response.data, 'Erro', 'error')
+  console.log('error.response', error.response);
+  if (error.response.status === 400) {
+    exibirMensagemErro(error.response.data.message)
+  }
+  else {
+    exibirMensagemErro(error.response.data)
+  }
 }
 
 export function exibirMensagemSucesso(mensagem){

@@ -1,5 +1,6 @@
 import React from 'react';
 import NavbarItem from './NavbarItem';
+import {ROTA_CADASTRO_USUARIOS, ROTA_CONSULTA_LANCAMENTOS, ROTA_LOGIN} from '../../utils/constantes';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class Navbar extends React.Component {
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav">
                 <NavbarItem href={'/'} label={'Home'} />
-                <NavbarItem href={'/cadastro-usuarios'} label={'Usuários'} />
-                <NavbarItem href={'/lancamentos'} label={'Lançamentos'} />
-                <NavbarItem href={'/login'} label={'Login'} />
+                <NavbarItem href={ROTA_CADASTRO_USUARIOS} label={'Usuários'} />
+                <NavbarItem href={ROTA_CONSULTA_LANCAMENTOS} label={'Lançamentos'} />
+                <NavbarItem href={ROTA_LOGIN} label={'Login'} />
               </ul>
             </div>
           </div>
