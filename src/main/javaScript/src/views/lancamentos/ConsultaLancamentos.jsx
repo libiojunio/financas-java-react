@@ -18,6 +18,7 @@ import LancamentoService from '../../services/lancamento/LancamentoService';
 import Row from '../../componentes/Row';
 import FormSelect from '../../componentes/Form/FormSelect';
 import TableLancamentos from './TableLancamentos';
+import DialogSimNao from '../../componentes/DialogSimNao';
 
 class ConsultaLancamentos extends React.Component {
 
@@ -33,7 +34,9 @@ class ConsultaLancamentos extends React.Component {
         tipo: '',
         descricao: '',
       },
+      lancamento: {},
       lancamentos: [{}],
+      visible: false,
     };
   }
 
@@ -50,9 +53,17 @@ class ConsultaLancamentos extends React.Component {
     });
   }
 
-  deletar = (lancamento) => {
-    this.lancamentoService.deletar(`/${lancamento.id}`).then(() => {
-      const index = this.state.lancamentos.indexOf(lancamento);
+  abrirModal = (lancamento) => {
+    this.setState({visible: true, lancamento});
+  }
+
+  visibleFalse = () => {
+    this.setState({visible: false});
+  }
+
+  deletar = () => {
+    this.lancamentoService.deletar(`/${this.state.lancamento.id}`).then(() => {
+      const index = this.state.lancamentos.indexOf(this.state.lancamento);
       const state = this.state;
       state.lancamentos.splice(index, 1);
       this.setState(state);
@@ -60,6 +71,7 @@ class ConsultaLancamentos extends React.Component {
     }).catch((error) => {
       exibirMensagemErroApi(error);
     });
+    this.visibleFalse();
   }
 
   editar = (lancamento) => {
@@ -117,10 +129,13 @@ class ConsultaLancamentos extends React.Component {
           </Row>
           <Row>
             <Container>
-              <TableLancamentos lancamentos={this.state.lancamentos} deletar={this.deletar} editar={this.editar}/>
+              <TableLancamentos lancamentos={this.state.lancamentos} deletar={this.abrirModal} editar={this.editar}/>
             </Container>
           </Row>
         </Card>
+        <DialogSimNao visible={this.state.visible} simFunc={this.deletar} onHide={this.visibleFalse} style={{width: '50%'}} >
+          <h4>Confirma a exclusão do lancamento '{this.state.lancamento.descricao}' ?</h4>
+        </DialogSimNao>
       </Container>
     )
   }
