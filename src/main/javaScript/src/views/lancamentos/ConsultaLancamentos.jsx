@@ -3,31 +3,19 @@ import Container from '../../componentes/Container';
 import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
-import {Link} from 'react-router-dom';
 import {
   GET_LISTA_ANOS,
   GET_LISTA_OBJETO_MESES,
-  REGEX_EMAIL,
-  ROTA_HOME,
-  ROTA_LOGIN,
-  STYLE_LINK,
   TIPO_LANCAMENTO
 } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
-import UsuarioService from '../../services/usuario/UsuarioService';
 import {exibirMensagemErro, exibirMensagemErroApi, exibirMensagemSucesso} from '../../componentes/toastr';
 import {
-  MSG_ERRO_CAMPOS_VAZIOS,
-  MSG_ERRO_EMAIL_FORMATO_INVALIDO,
-  MSG_ERRO_SENHA_MINIMOS_CARACTERES,
-  MSG_ERRO_SENHAS_NAO_SAO_IGUAIS, MSG_SUCCESS_PADRAO,
-  MSG_USUARIO_AUTENTICADO_COM_SUCESSO,
-  MSG_USUARIO_CADASTRADO_COM_SUCESSO
+  MSG_ERRO_CAMPOS_VAZIOS, MSG_SUCCESS_PADRAO,
 } from '../../utils/mensagens';
 import {formatarArrayDeStrings} from '../../utils/metodos';
 import LancamentoService from '../../services/lancamento/LancamentoService';
 import Row from '../../componentes/Row';
-import LocalStorageService from '../../services/outros/LocalStorageService';
 import FormSelect from '../../componentes/Form/FormSelect';
 import TableLancamentos from './TableLancamentos';
 

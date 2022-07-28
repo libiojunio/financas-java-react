@@ -4,7 +4,6 @@ import {
   MARGIN_RIGHT_5PX,
   ROTA_CADASTRO_USUARIOS,
   ROTA_CONSULTA_LANCAMENTOS,
-  ROTA_LANCAMENTOS
 } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import lancamentoService from '../../services/lancamento/LancamentoService';
