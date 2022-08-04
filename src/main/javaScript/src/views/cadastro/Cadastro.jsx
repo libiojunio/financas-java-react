@@ -99,7 +99,7 @@ class Cadastro extends React.Component {
     const idSenha = 'senha';
     const idSenhaRepeticao = 'senhaRepeticao';
 
-    const descricaoCancelar = <Link style={STYLE_LINK} to={'/login'}>Cancelar</Link>;
+    const descricaoCancelar = <Link style={STYLE_LINK} to={ROTA_LOGIN}>Cancelar</Link>;
 
     return (
       <Container tipo={'bsDocs'}>

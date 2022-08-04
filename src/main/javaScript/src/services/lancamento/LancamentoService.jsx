@@ -20,6 +20,10 @@ class LancamentoService extends ApiServices {
     return this.get(`/${usuario}${mes}${ano}${descricao}${tipo}`);
   }
 
+  salvar(lancamento){
+    return this.post('/', lancamento)
+  }
+
   deletar(url) {
     return this.delete(url);
   }

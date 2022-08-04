@@ -1,6 +1,7 @@
 import React from 'react';
 import NavbarItem from './NavbarItem';
-import {ROTA_CADASTRO_USUARIOS, ROTA_CONSULTA_LANCAMENTOS, ROTA_LOGIN} from '../../utils/constantes';
+import {ROTA_CADASTRO_USUARIOS, ROTA_CONSULTA_LANCAMENTOS, ROTA_HOME, ROTA_LOGIN} from '../../utils/constantes';
+import {Link} from 'react-router-dom';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Navbar extends React.Component {
       <>
         <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
           <div className="container">
-            <a href="https://bootswatch.com/" className="navbar-brand">Minhas Finanças</a>
+            <Link to={ROTA_HOME} className="navbar-brand">Minhas Finanças</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>

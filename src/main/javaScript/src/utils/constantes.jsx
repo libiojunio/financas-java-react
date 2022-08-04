@@ -11,6 +11,7 @@ export const REGEX_EMAIL = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/;
 export const ROTA_HOME = '/';
 export const ROTA_CADASTRO_USUARIOS = '/cadastro-usuarios';
 export const ROTA_CONSULTA_LANCAMENTOS = '/consulta-lancamentos';
+export const ROTA_CADASTRO_LANCAMENTOS = '/cadastro-lancamentos';
 export const ROTA_LOGIN = '/login';
 
 export const GET_LISTA_ANOS = (anoInicial = 1970, final) => {
@@ -43,4 +44,10 @@ export const GET_LISTA_OBJETO_MESES = [
 export const TIPO_LANCAMENTO = [
   {id: 'DESPESA', descricao: 'Despesa'},
   {id: 'RECEITA', descricao: 'Receita'},
-]
+];
+
+export const STATUS = [
+  {id: 'CANCELADO', descricao: 'Cancelado'},
+  {id: 'EFETIVADO', descricao: 'Efetivado'},
+  {id: 'PENDENTE', descricao: 'Pendente'},
+];

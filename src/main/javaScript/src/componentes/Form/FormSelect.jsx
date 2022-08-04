@@ -8,10 +8,11 @@ class FormSelect extends React.Component {
   }
 
   render() {
+    const campoVazio = this.props.campoVazio ? <option value={null}></option> : null;
     return(
       <select defaultValue={this.props.defaultValue} className="form-select" aria-label="Default select example"
               id={this.props.id} name={this.props.id} onChange={this.props.onChange}>
-        <option value={null}></option>
+        {campoVazio}
         {this.props.itens.map((item) => {
           return <option value={item.id} key={item.id}>{item.descricao}</option>
         })}
@@ -26,6 +27,7 @@ FormSelect.propTypes = {
   defaultValue: PropTypes.any.isRequired,
   itens: PropTypes.array.isRequired,
   placeholder: PropTypes.string,
+  campoVazio: PropTypes.bool,
 };
 
 export default FormSelect;

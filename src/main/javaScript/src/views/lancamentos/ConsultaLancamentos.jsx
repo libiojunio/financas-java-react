@@ -5,7 +5,7 @@ import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
 import {
   GET_LISTA_ANOS,
-  GET_LISTA_OBJETO_MESES,
+  GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS, STYLE_LINK,
   TIPO_LANCAMENTO
 } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
@@ -19,6 +19,7 @@ import Row from '../../componentes/Row';
 import FormSelect from '../../componentes/Form/FormSelect';
 import TableLancamentos from './TableLancamentos';
 import DialogSimNao from '../../componentes/DialogSimNao';
+import {Link} from 'react-router-dom';
 
 class ConsultaLancamentos extends React.Component {
 
@@ -74,10 +75,6 @@ class ConsultaLancamentos extends React.Component {
     this.visibleFalse();
   }
 
-  editar = (lancamento) => {
-    // this.lancamentoService;
-  }
-
   onChange = (value) => {
     const state = this.state;
     state.formulario[value.target.id] = value.target.value;
@@ -104,6 +101,7 @@ class ConsultaLancamentos extends React.Component {
     const idAno = 'ano';
     const idMes = 'mes';
     const idDescricao = 'descricao';
+    const descricaoCadastrar = <Link style={STYLE_LINK} to={ROTA_CADASTRO_LANCAMENTOS}>Cadastrar</Link>;
 
     return (
       <Container tipo={'bsDocs'}>
@@ -111,13 +109,13 @@ class ConsultaLancamentos extends React.Component {
           <Row>
             <Container>
               <FormGroup label={'Ano:*'} htmlFor={idAno}>
-                <FormSelect defaultValue={this.state.formulario.ano} id={idAno} itens={GET_LISTA_ANOS()} onChange={this.onChange}/>
+                <FormSelect campoVazio defaultValue={this.state.formulario.ano} id={idAno} itens={GET_LISTA_ANOS()} onChange={this.onChange}/>
               </FormGroup>
               <FormGroup label={'Mês:'} htmlFor={idMes}>
-                <FormSelect defaultValue={this.state.formulario.mes} id={idMes} itens={GET_LISTA_OBJETO_MESES} onChange={this.onChange}/>
+                <FormSelect campoVazio defaultValue={this.state.formulario.mes} id={idMes} itens={GET_LISTA_OBJETO_MESES} onChange={this.onChange}/>
               </FormGroup>
               <FormGroup label={'Tipo:'} htmlFor={idTipo}>
-                <FormSelect defaultValue={this.state.formulario.tipo} id={idTipo} itens={TIPO_LANCAMENTO} onChange={this.onChange}/>
+                <FormSelect campoVazio defaultValue={this.state.formulario.tipo} id={idTipo} itens={TIPO_LANCAMENTO} onChange={this.onChange}/>
               </FormGroup>
               <FormGroup label={'Descrição:'} htmlFor={idDescricao}>
                 <input
@@ -125,6 +123,7 @@ class ConsultaLancamentos extends React.Component {
                   placeholder="Digite a descrição" value={this.state.formulario.descricao} />
               </FormGroup>
               <Button descricao={'Buscar'} className={'btn btn-success'} onClick={this.buscar} />
+              <Button descricao={descricaoCadastrar} className={'btn btn-warning'} />
             </Container>
           </Row>
           <Row>

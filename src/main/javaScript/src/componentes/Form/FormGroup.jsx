@@ -9,7 +9,7 @@ class FormGroup extends React.Component {
 
   render() {
     return(
-      <div className="form-group mb-3">
+      <div className={`form-group mb-3 ${this.props.className}`}>
         <label htmlFor={this.props.htmlFor}>{this.props.label}</label>
         {this.props.children}
       </div>
@@ -20,6 +20,7 @@ class FormGroup extends React.Component {
 FormGroup.propTypes = {
   label: PropTypes.string.isRequired,
   htmlFor: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default FormGroup;

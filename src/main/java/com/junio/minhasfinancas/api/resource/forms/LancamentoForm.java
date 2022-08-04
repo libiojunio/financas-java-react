@@ -1,7 +1,5 @@
 package com.junio.minhasfinancas.api.resource.forms;
 
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +7,6 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@Data
-@Builder
 public class LancamentoForm {
   private Long id;
   private String descricao;
