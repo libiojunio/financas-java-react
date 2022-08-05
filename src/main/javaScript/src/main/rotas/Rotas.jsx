@@ -26,7 +26,8 @@ class Rotas extends React.Component {
         <Route path={ROTA_LOGIN} element={<Login />} />
         <Route path={ROTA_CADASTRO_USUARIOS} element={<Cadastro />} />
         <Route path={ROTA_CONSULTA_LANCAMENTOS} element={<ConsultaLancamentos />} />
-        <Route path={ROTA_CADASTRO_LANCAMENTOS} element={<CadastroLancamentos />} />
+        <Route path={`${ROTA_CADASTRO_LANCAMENTOS}`} element={<CadastroLancamentos />} />
+        <Route path={`${ROTA_CADASTRO_LANCAMENTOS}/:id`} element={<CadastroLancamentos />} />
     </Routes>
    )
   }

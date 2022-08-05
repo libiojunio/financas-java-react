@@ -5,7 +5,7 @@ import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
 import {
   GET_LISTA_ANOS,
-  GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS, STYLE_LINK,
+  GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS, ROTA_CONSULTA_LANCAMENTOS, STYLE_LINK,
   TIPO_LANCAMENTO
 } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
@@ -101,7 +101,6 @@ class ConsultaLancamentos extends React.Component {
     const idAno = 'ano';
     const idMes = 'mes';
     const idDescricao = 'descricao';
-    const descricaoCadastrar = <Link style={STYLE_LINK} to={ROTA_CADASTRO_LANCAMENTOS}>Cadastrar</Link>;
 
     return (
       <Container tipo={'bsDocs'}>
@@ -123,7 +122,7 @@ class ConsultaLancamentos extends React.Component {
                   placeholder="Digite a descrição" value={this.state.formulario.descricao} />
               </FormGroup>
               <Button descricao={'Buscar'} className={'btn btn-success'} onClick={this.buscar} />
-              <Button descricao={descricaoCadastrar} className={'btn btn-warning'} />
+              <Button descricao={'Cadastrar'} className={'btn btn-warning'} link={ROTA_CADASTRO_LANCAMENTOS}/>
             </Container>
           </Row>
           <Row>

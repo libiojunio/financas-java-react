@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import currencyFormatter from 'currency-formatter';
-import {GET_LISTA_OBJETO_MESES} from '../../utils/constantes';
+import {GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS} from '../../utils/constantes';
 import Button from '../../componentes/Button';
 
 class TableLancamentos extends React.Component {
@@ -26,7 +26,7 @@ class TableLancamentos extends React.Component {
           <td>{lancamento.statusLancamento}</td>
           {lancamento.id &&
             <td>
-              <Button descricao={'Editar'} className={'btn btn-warning'} onClick={() => {this.props.editar(lancamento)}} />
+              <Button descricao={'Editar'} className={'btn btn-warning'} link={`${ROTA_CADASTRO_LANCAMENTOS}/${lancamento.id}`} />
               <Button descricao={'Deletar'} className={'btn btn-danger'} onClick={() => {this.props.deletar(lancamento)}} />
             </td>}
         </tr>

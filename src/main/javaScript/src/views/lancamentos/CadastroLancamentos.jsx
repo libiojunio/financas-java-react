@@ -123,7 +123,6 @@ class CadastroLancamentos extends React.Component {
     const idStatus = 'status';
     const idAno = 'ano';
     const idMes = 'mes';
-    const descricaoCancelar = <Link style={STYLE_LINK} to={ROTA_CONSULTA_LANCAMENTOS}>Cancelar</Link>;
 
     return (
       <Container tipo={'bsDocs'}>
@@ -157,7 +156,7 @@ class CadastroLancamentos extends React.Component {
         </Row>
         <Row>
           <Button descricao={'Salvar'} className={'btn btn-success col-md-2'} style={STYLE_BTN_SALVAR} onClick={this.salvar}  />
-          <Button descricao={descricaoCancelar} className={'btn btn-danger col-md-2'} />
+          <Button link={ROTA_CONSULTA_LANCAMENTOS} descricao={'Cancelar'} className={'btn btn-danger col-md-2'} />
         </Row>
 
 
