@@ -20,6 +20,11 @@ class LancamentoService extends ApiServices {
     return this.get(`/${usuario}${mes}${ano}${descricao}${tipo}`);
   }
 
+  buscarLancamentoId(id){
+    const usuario = `?usuarioId=${LocalStorageService.getItemObj('_usuario_logado').id}`;
+    return this.get(`/buscarLancamentoId/${usuario}&lancamentoId=${id}`);
+  }
+
   salvar(lancamento){
     return this.post('/', lancamento)
   }

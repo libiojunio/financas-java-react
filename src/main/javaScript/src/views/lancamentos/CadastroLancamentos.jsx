@@ -50,6 +50,29 @@ class CadastroLancamentos extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.params.id){
+      this.lancamentoService.buscarLancamentoId(this.props.params.id).then((lanc) => {
+        const lancamento = lanc.data;
+        console.log('lancamento', lancamento);
+        this.setState({
+          formulario: {
+            id: lancamento.id,
+            ano: lancamento.ano,
+            mes: lancamento.mes,
+            tipo: lancamento.tipo,
+            status: lancamento.status,
+            valor: lancamento.valor,
+            descricao: lancamento.descricao,
+            usuario: lancamento.usuario.id,
+          }
+        });
+      }).catch((error) => {
+        exibirMensagemErroApi(error)
+      });
+    }
+  }
+
   validarFormulario = () => {
     const camposVazios = [];
     const { formulario } = this.state;
@@ -158,8 +181,6 @@ class CadastroLancamentos extends React.Component {
           <Button descricao={'Salvar'} className={'btn btn-success col-md-2'} style={STYLE_BTN_SALVAR} onClick={this.salvar}  />
           <Button link={ROTA_CONSULTA_LANCAMENTOS} descricao={'Cancelar'} className={'btn btn-danger col-md-2'} />
         </Row>
-
-
       </Container>
     )
   }

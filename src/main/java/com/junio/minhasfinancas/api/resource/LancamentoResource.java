@@ -53,6 +53,26 @@ public class LancamentoResource {
     return ResponseEntity.ok(lancamentoList);
   }
 
+  @GetMapping("/buscarLancamentoId")
+  public ResponseEntity buscarLancamentoId (
+          @RequestParam("usuarioId") Long usuarioId,
+          @RequestParam("lancamentoId") Long lancamentoId
+  ){
+    Optional<Usuario> usuario = usuarioService.findById(usuarioId);
+    if (usuario.isPresent()) {
+      Optional<Lancamento> lancamento = lancamentoService.findById(lancamentoId);
+      if (lancamento.isPresent() && lancamento.get().getUsuario().getId().equals(usuario.get().getId())){
+        return ResponseEntity.ok(lancamento);
+      }
+      else {
+        return ResponseEntity.badRequest().body("O lançamento não pertence a este usuário.");
+      }
+    }
+    else {
+      return ResponseEntity.badRequest().body("Usuário não encontrado.");
+    }
+  }
+
   @PostMapping
   public ResponseEntity salvar(@RequestBody LancamentoForm lancamentoForm){
     Lancamento lancamento = new Lancamento();
