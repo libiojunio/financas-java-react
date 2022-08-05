@@ -26,7 +26,7 @@ class TableLancamentos extends React.Component {
           <td>{lancamento.statusLancamento}</td>
           {lancamento.id &&
             <td>
-              <Button descricao={'Editar'} className={'btn btn-warning'} link={`${ROTA_CADASTRO_LANCAMENTOS}/${lancamento.id}`} />
+              <Button descricao={'Editar'} className={'btn btn-warning'} onClick={() => {this.props.editar(lancamento)}} />
               <Button descricao={'Deletar'} className={'btn btn-danger'} onClick={() => {this.props.deletar(lancamento)}} />
             </td>}
         </tr>

@@ -41,6 +41,18 @@ class ConsultaLancamentos extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.buscar();
+  }
+
+  rotaCadastrarLancamento = () => {
+    this.props.navigate(ROTA_CADASTRO_LANCAMENTOS);
+  }
+
+  rotaEditarLancamento = (lancamento) => {
+    this.props.navigate(`${ROTA_CADASTRO_LANCAMENTOS}/${lancamento.id}`);
+  }
+
   buscar = () => {
     const msgError = this.validarFormulario();
     if (msgError) {
@@ -122,12 +134,12 @@ class ConsultaLancamentos extends React.Component {
                   placeholder="Digite a descrição" value={this.state.formulario.descricao} />
               </FormGroup>
               <Button descricao={'Buscar'} className={'btn btn-success'} onClick={this.buscar} />
-              <Button descricao={'Cadastrar'} className={'btn btn-warning'} link={ROTA_CADASTRO_LANCAMENTOS}/>
+              <Button descricao={'Cadastrar'} className={'btn btn-warning'} onClick={this.rotaCadastrarLancamento}/>
             </Container>
           </Row>
           <Row>
             <Container>
-              <TableLancamentos lancamentos={this.state.lancamentos} deletar={this.abrirModal} editar={this.editar}/>
+              <TableLancamentos lancamentos={this.state.lancamentos} deletar={this.abrirModal} editar={this.rotaEditarLancamento}/>
             </Container>
           </Row>
         </Card>

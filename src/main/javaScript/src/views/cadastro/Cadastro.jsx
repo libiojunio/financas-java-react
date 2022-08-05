@@ -4,7 +4,7 @@ import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
-import {REGEX_EMAIL, ROTA_LOGIN, STYLE_LINK} from '../../utils/constantes';
+import {REGEX_EMAIL, ROTA_CADASTRO_LANCAMENTOS, ROTA_LOGIN, STYLE_LINK} from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import UsuarioService from '../../services/usuario/UsuarioService';
 import {exibirMensagemErro, exibirMensagemErroApi, exibirMensagemSucesso} from '../../componentes/toastr';
@@ -93,13 +93,15 @@ class Cadastro extends React.Component {
     this.setState(state);
   }
 
+  rotaLogin = () => {
+    this.props.navigate(ROTA_LOGIN);
+  }
+
   render() {
     const idNome = 'nome';
     const idEmail = 'email';
     const idSenha = 'senha';
     const idSenhaRepeticao = 'senhaRepeticao';
-
-    const descricaoCancelar = <Link style={STYLE_LINK} to={ROTA_LOGIN}>Cancelar</Link>;
 
     return (
       <Container tipo={'bsDocs'}>
@@ -125,7 +127,7 @@ class Cadastro extends React.Component {
               placeholder="Digite a senha novamente" value={this.state.formulario.senhaRepeticao} />
           </FormGroup>
           <Button descricao={'Salvar'} className={'btn btn-success'} onClick={this.salvar} />
-          <Button descricao={descricaoCancelar} className={'btn btn-danger'} />
+          <Button descricao={'Cancelar'} className={'btn btn-danger'} onClick={this.rotaLogin} />
         </Card>
       </Container>
     )

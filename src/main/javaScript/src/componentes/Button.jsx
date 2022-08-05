@@ -16,12 +16,6 @@ class Button extends React.Component {
   render() {
     const style = this.props.style || this.state.style;
     return(
-      this.props.link ?
-        <Link style={STYLE_LINK} to={this.props.link}>
-          <button className={this.props.className} onClick={this.props.onClick} style={style}>
-            {this.props.descricao}
-          </button>
-        </Link> :
       <button className={this.props.className} onClick={this.props.onClick} style={style}>
         {this.props.descricao}
       </button>

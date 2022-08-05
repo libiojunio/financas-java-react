@@ -4,7 +4,7 @@ import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
 import {Link} from 'react-router-dom';
-import {ROTA_HOME, STYLE_LINK } from '../../utils/constantes';
+import {ROTA_CADASTRO_USUARIOS, ROTA_HOME, ROTA_LOGIN, STYLE_LINK} from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import usuarioService from '../../services/usuario/UsuarioService';
 import LocalStorageService from '../../services/outros/LocalStorageService';
@@ -47,11 +47,13 @@ class Login extends React.Component {
     this.setState(state);
   }
 
+  rotaCadastroUsuarios = () => {
+    this.props.navigate(ROTA_CADASTRO_USUARIOS);
+  }
+
   render() {
     const idEmail = 'inputEmail';
     const idSenha = 'inputSenha';
-
-    const descricaoCadastrar = <Link style={STYLE_LINK} to={'/cadastro-usuarios'}>Cadastrar</Link>;
 
     return (
       <Container tipo={'bsDocs'}>
@@ -68,7 +70,7 @@ class Login extends React.Component {
                  placeholder="Digite a senha" value={this.state.inputSenha}/>
              </FormGroup>
              <Button onClick={this.autenticar} descricao={'Entrar'} className={'btn btn-success'}/>
-             <Button descricao={descricaoCadastrar} className={'btn btn-danger'}/>
+             <Button descricao={'Cadastrar'} className={'btn btn-danger'} onClick={this.rotaCadastroUsuarios}/>
            </fieldset>
          </Card>
       </Container>

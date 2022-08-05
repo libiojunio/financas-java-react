@@ -7,17 +7,15 @@ import FormGroup from '../../componentes/Form/FormGroup';
 import FormSelect from '../../componentes/Form/FormSelect';
 import {
   GET_LISTA_ANOS,
-  GET_LISTA_OBJETO_MESES, REGEX_EMAIL,
-  ROTA_CONSULTA_LANCAMENTOS, ROTA_LOGIN,
+  GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS,
+  ROTA_CONSULTA_LANCAMENTOS,
   STATUS,
-  STYLE_LINK,
   TIPO_LANCAMENTO
 } from '../../utils/constantes';
 import Button from '../../componentes/Button';
-import {Link} from 'react-router-dom';
 import {
   MSG_ERRO_CAMPOS_VAZIOS, MSG_ERRO_DESCRICAO_MINIMOS_CARACTERES,
-  MSG_ERRO_VALOR_NAO_E_UM_NUMERO,
+  MSG_ERRO_VALOR_NAO_E_UM_NUMERO, MSG_LANCAMENTO_ATUALIZADO_COM_SUCESSO,
   MSG_LANCAMENTO_CADASTRADO_COM_SUCESSO,
 } from '../../utils/mensagens';
 import {formatarArrayDeStrings} from '../../utils/metodos';
@@ -54,14 +52,13 @@ class CadastroLancamentos extends React.Component {
     if (this.props.params.id){
       this.lancamentoService.buscarLancamentoId(this.props.params.id).then((lanc) => {
         const lancamento = lanc.data;
-        console.log('lancamento', lancamento);
         this.setState({
           formulario: {
             id: lancamento.id,
             ano: lancamento.ano,
             mes: lancamento.mes,
             tipo: lancamento.tipo,
-            status: lancamento.status,
+            status: lancamento.statusLancamento,
             valor: lancamento.valor,
             descricao: lancamento.descricao,
             usuario: lancamento.usuario.id,
@@ -125,18 +122,34 @@ class CadastroLancamentos extends React.Component {
     if (msgError) {
       return exibirMensagemErro(msgError);
     }
-    this.lancamentoService.salvar(this.state.formulario).then(() => {
-      exibirMensagemSucesso(MSG_LANCAMENTO_CADASTRADO_COM_SUCESSO());
-      this.props.navigate(ROTA_CONSULTA_LANCAMENTOS);
-    }).catch((error) => {
-      exibirMensagemErroApi(error)
-    });
+    else {
+      if (this.props.params.id){
+        this.lancamentoService.editar(this.state.formulario).then(() => {
+          exibirMensagemSucesso(MSG_LANCAMENTO_ATUALIZADO_COM_SUCESSO());
+          this.props.navigate(ROTA_CONSULTA_LANCAMENTOS);
+        }).catch((error) => {
+          exibirMensagemErroApi(error)
+        });
+      }
+      else {
+        this.lancamentoService.salvar(this.state.formulario).then(() => {
+          exibirMensagemSucesso(MSG_LANCAMENTO_CADASTRADO_COM_SUCESSO());
+          this.props.navigate(ROTA_CONSULTA_LANCAMENTOS);
+        }).catch((error) => {
+          exibirMensagemErroApi(error)
+        });
+      }
+    }
   }
 
   onChange = (value) => {
     const state = this.state;
     state.formulario[value.target.id] = value.target.value;
     this.setState(state);
+  }
+
+  rotaConsultarLancamento = () => {
+    this.props.navigate(ROTA_CONSULTA_LANCAMENTOS);
   }
 
   render() {
@@ -179,7 +192,7 @@ class CadastroLancamentos extends React.Component {
         </Row>
         <Row>
           <Button descricao={'Salvar'} className={'btn btn-success col-md-2'} style={STYLE_BTN_SALVAR} onClick={this.salvar}  />
-          <Button link={ROTA_CONSULTA_LANCAMENTOS} descricao={'Cancelar'} className={'btn btn-danger col-md-2'} />
+          <Button descricao={'Cancelar'} className={'btn btn-danger col-md-2'} onClick={this.rotaConsultarLancamento}/>
         </Row>
       </Container>
     )

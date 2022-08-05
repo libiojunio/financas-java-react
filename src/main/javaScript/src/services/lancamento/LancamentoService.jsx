@@ -29,6 +29,10 @@ class LancamentoService extends ApiServices {
     return this.post('/', lancamento)
   }
 
+  editar(lancamento){
+    return this.put(`/${lancamento.id}`, lancamento)
+  }
+
   deletar(url) {
     return this.delete(url);
   }

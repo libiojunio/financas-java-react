@@ -10,7 +10,8 @@ class FormSelect extends React.Component {
   render() {
     const campoVazio = this.props.campoVazio ? <option value={null}></option> : null;
     return(
-      <select defaultValue={this.props.defaultValue} className="form-select" aria-label="Default select example"
+      <select value={this.props.defaultValue}
+              className="form-select" aria-label="Default select example"
               id={this.props.id} name={this.props.id} onChange={this.props.onChange}>
         {campoVazio}
         {this.props.itens.map((item) => {
