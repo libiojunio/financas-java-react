@@ -7,7 +7,7 @@ import FormGroup from '../../componentes/Form/FormGroup';
 import FormSelect from '../../componentes/Form/FormSelect';
 import {
   GET_LISTA_ANOS,
-  GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS,
+  GET_LISTA_OBJETO_MESES, GO_BACK, ROTA_CADASTRO_LANCAMENTOS,
   ROTA_CONSULTA_LANCAMENTOS,
   STATUS,
   TIPO_LANCAMENTO
@@ -21,6 +21,7 @@ import {
 import {formatarArrayDeStrings} from '../../utils/metodos';
 import {exibirMensagemErro, exibirMensagemErroApi, exibirMensagemSucesso} from '../../componentes/toastr';
 import LocalStorageService from '../../services/outros/LocalStorageService';
+import Card from '../../componentes/Card';
 
 const STYLE_BTN_SALVAR = {
   margin: '0px 5px 0px 13px'
@@ -159,41 +160,46 @@ class CadastroLancamentos extends React.Component {
     const idStatus = 'status';
     const idAno = 'ano';
     const idMes = 'mes';
+    const isCadastrando = !this.props.params.id
+    const tituloCard = isCadastrando ? 'Cadastrar' : 'Atualizar';
 
     return (
       <Container tipo={'bsDocs'}>
-        <Row>
-          <FormGroup label={'Descrição: *'} htmlFor={idDescricao} className={'col-md-6'}>
-            <input
-              type="text" className="form-control" id={idDescricao} name={idDescricao} onChange={this.onChange}
-              placeholder="Digite a descrição" value={this.state.formulario.descricao} />
-          </FormGroup>
-          <FormGroup label={'Valor: *'} htmlFor={idValor} className={'col-md-6'}>
-            <input
-              type="number" className="form-control" id={idValor} name={idValor} onChange={this.onChange}
-              placeholder="Digite o valor" value={this.state.formulario.valor} />
-          </FormGroup>
-        </Row>
-        <Row>
-          <FormGroup label={'Mês:*'} htmlFor={idMes} className={'col-md-6'}>
-            <FormSelect defaultValue={this.state.formulario.mes} id={idMes} itens={GET_LISTA_OBJETO_MESES} onChange={this.onChange}/>
-          </FormGroup>
-          <FormGroup label={'Ano:*'} htmlFor={idAno} className={'col-md-6'}>
-            <FormSelect defaultValue={this.state.formulario.ano} id={idAno} itens={GET_LISTA_ANOS()} onChange={this.onChange} />
-          </FormGroup>
-        </Row>
-        <Row>
-          <FormGroup label={'Tipo:*'} htmlFor={idTipo} className={'col-md-6'}>
-            <FormSelect defaultValue={this.state.formulario.tipo} id={idTipo} itens={TIPO_LANCAMENTO} onChange={this.onChange}/>
-          </FormGroup>
-          <FormGroup label={'Status:*'} htmlFor={idStatus} className={'col-md-6'}>
-            <FormSelect defaultValue={this.state.formulario.status} id={idStatus} itens={STATUS} onChange={this.onChange}/>
-          </FormGroup>
-        </Row>
-        <Row>
-          <Button descricao={'Salvar'} className={'btn btn-success col-md-2'} style={STYLE_BTN_SALVAR} onClick={this.salvar}  />
-          <Button descricao={'Cancelar'} className={'btn btn-danger col-md-2'} onClick={this.rotaConsultarLancamento}/>
-        </Row>
+        <Card titulo={`${tituloCard} lançamentos`}>
+          <Row>
+            <FormGroup label={'Descrição: *'} htmlFor={idDescricao} className={'col-md-12'}>
+              <input
+                type="text" className="form-control" id={idDescricao} name={idDescricao} onChange={this.onChange}
+                placeholder="Digite a descrição" value={this.state.formulario.descricao} />
+            </FormGroup>
+          </Row>
+          <Row>
+            <FormGroup label={'Mês:*'} htmlFor={idMes} className={'col-md-6'}>
+              <FormSelect defaultValue={this.state.formulario.mes} id={idMes} itens={GET_LISTA_OBJETO_MESES} onChange={this.onChange}/>
+            </FormGroup>
+            <FormGroup label={'Ano:*'} htmlFor={idAno} className={'col-md-6'}>
+              <FormSelect defaultValue={this.state.formulario.ano} id={idAno} itens={GET_LISTA_ANOS()} onChange={this.onChange} />
+            </FormGroup>
+          </Row>
+          <Row>
+            <FormGroup label={'Valor: *'} htmlFor={idValor} className={'col-md-4'}>
+              <input
+                type="number" className="form-control" id={idValor} name={idValor} onChange={this.onChange}
+                placeholder="Digite o valor" value={this.state.formulario.valor} />
+            </FormGroup>
+            <FormGroup label={'Tipo:*'} htmlFor={idTipo} className={'col-md-4'}>
+              <FormSelect defaultValue={this.state.formulario.tipo} id={idTipo} itens={TIPO_LANCAMENTO} onChange={this.onChange}/>
+            </FormGroup>
+            <FormGroup label={'Status:*'} htmlFor={idStatus} className={'col-md-4'}>
+              <FormSelect disabled={isCadastrando} defaultValue={this.state.formulario.status}
+                          id={idStatus} itens={STATUS} onChange={this.onChange}/>
+            </FormGroup>
+          </Row>
+          <Row>
+            <Button descricao={'Salvar'} className={'btn btn-success col-md-2'} style={STYLE_BTN_SALVAR} onClick={this.salvar}  />
+            <Button descricao={'Cancelar'} className={'btn btn-danger col-md-2'} onClick={this.rotaConsultarLancamento}/>
+          </Row>
+        </Card>
       </Container>
     )
   }

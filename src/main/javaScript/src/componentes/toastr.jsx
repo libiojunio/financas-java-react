@@ -31,6 +31,9 @@ export function exibirMensagemErroApi(error){
   if (error.response.status === 400) {
     exibirMensagemErro(error.response.data.message)
   }
+  else if (!error.response.data) {
+    exibirMensagemErro("Erro 404 - Servidor indisponível!")
+  }
   else {
     exibirMensagemErro(error.response.data)
   }

@@ -14,6 +14,8 @@ export const ROTA_CONSULTA_LANCAMENTOS = '/consulta-lancamentos';
 export const ROTA_CADASTRO_LANCAMENTOS = '/cadastro-lancamentos';
 export const ROTA_LOGIN = '/login';
 
+export const GO_BACK = -1;
+
 export const GET_LISTA_ANOS = (anoInicial = 1970, final) => {
   const ano = [];
   const anoFinal = final ? final : new Date().getFullYear() + 20;
