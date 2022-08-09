@@ -35,56 +35,18 @@ class Cadastro extends React.Component {
     };
   }
 
-  validarFormulario = () => {
-    const camposVazios = [];
-    const { formulario } = this.state;
-
-    if (!formulario.nome) {
-      camposVazios.push('Nome')
-    }
-
-    if (!formulario.email) {
-      camposVazios.push('Email')
-    }
-
-    if (!formulario.senha) {
-      camposVazios.push('Senha')
-    }
-
-    if (!formulario.senhaRepeticao) {
-      camposVazios.push('Repitir a senha')
-    }
-
-    if (camposVazios.length > 0) {
-      return MSG_ERRO_CAMPOS_VAZIOS(formatarArrayDeStrings(camposVazios));
-    }
-
-    if (!formulario.email.match(REGEX_EMAIL)) {
-      return MSG_ERRO_EMAIL_FORMATO_INVALIDO
-    }
-
-    if (formulario.senha.length <= 3) {
-      return MSG_ERRO_SENHA_MINIMOS_CARACTERES
-    }
-
-    if (formulario.senha !== formulario.senhaRepeticao) {
-      return MSG_ERRO_SENHAS_NAO_SAO_IGUAIS
-    }
-
-    return false;
-  }
-
   salvar = () => {
-    const msgError = this.validarFormulario();
-    if (msgError) {
-      return exibirMensagemErro(msgError);
+    try {
+      this.usuarioService.validarFormularioUsuario(this.state.formulario);
+      this.usuarioService.salvar(this.state.formulario).then(() => {
+        exibirMensagemSucesso(MSG_USUARIO_CADASTRADO_COM_SUCESSO(this.state.formulario.nome))
+        this.props.navigate(ROTA_LOGIN);
+      }).catch((error) => {
+        exibirMensagemErroApi(error)
+      });
+    } catch (e) {
+      e.mensagens.forEach(msg => exibirMensagemErro(msg));
     }
-    this.usuarioService.salvar(this.state.formulario).then(() => {
-      exibirMensagemSucesso(MSG_USUARIO_CADASTRADO_COM_SUCESSO(this.state.formulario.nome))
-      this.props.navigate(ROTA_LOGIN);
-    }).catch((error) => {
-      exibirMensagemErroApi(error)
-    });
   }
 
   onChange = (value) => {

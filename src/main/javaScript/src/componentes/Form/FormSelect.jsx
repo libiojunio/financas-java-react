@@ -8,6 +8,7 @@ class FormSelect extends React.Component {
   }
 
   render() {
+    console.log('this.props.itens', this.props.itens);
     const campoVazio = this.props.campoVazio ? <option value={null}></option> : null;
     return(
       <select value={this.props.defaultValue} disabled={!!this.props.disabled}

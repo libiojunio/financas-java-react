@@ -71,59 +71,9 @@ class CadastroLancamentos extends React.Component {
     }
   }
 
-  validarFormulario = () => {
-    const camposVazios = [];
-    const { formulario } = this.state;
-
-    if (!formulario.descricao) {
-      camposVazios.push('Descrição')
-    }
-
-    if (!formulario.valor) {
-      camposVazios.push('Valor')
-    }
-
-    if (!formulario.mes) {
-      camposVazios.push('Mês')
-    }
-
-    if (!formulario.ano) {
-      camposVazios.push('Ano')
-    }
-
-    if (!formulario.tipo) {
-      camposVazios.push('Tipo')
-    }
-
-    if (!formulario.status) {
-      camposVazios.push('Status')
-    }
-
-    if (camposVazios.length > 0) {
-      return MSG_ERRO_CAMPOS_VAZIOS(formatarArrayDeStrings(camposVazios));
-    }
-
-    if (formulario.descricao.length <= 3) {
-      return MSG_ERRO_DESCRICAO_MINIMOS_CARACTERES;
-    }
-
-    if (!Number(formulario.valor)) {
-      return MSG_ERRO_VALOR_NAO_E_UM_NUMERO;
-    }
-
-    const state = this.state;
-    state.formulario.valor = Number(this.state.formulario.valor);
-    this.setState(state)
-
-    return false;
-  }
-
   salvar = () => {
-    const msgError = this.validarFormulario();
-    if (msgError) {
-      return exibirMensagemErro(msgError);
-    }
-    else {
+    try {
+      this.lancamentoService.validarFormularioLancamento(this.state.formulario);
       if (this.props.params.id){
         this.lancamentoService.editar(this.state.formulario).then(() => {
           exibirMensagemSucesso(MSG_LANCAMENTO_ATUALIZADO_COM_SUCESSO());
@@ -140,6 +90,8 @@ class CadastroLancamentos extends React.Component {
           exibirMensagemErroApi(error)
         });
       }
+    } catch (e) {
+      e.mensagens.forEach(msg => exibirMensagemErro(msg));
     }
   }
 

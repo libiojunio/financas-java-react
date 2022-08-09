@@ -1,9 +1,43 @@
 import ApiServices from '../outros/ApiServices';
 import LocalStorageService from '../outros/LocalStorageService';
+import ErroValidacao from '../exception/ErroValidacao';
 
 class LancamentoService extends ApiServices {
   constructor() {
     super('api/lancamentos');
+  }
+
+  validarFormularioLancamento(formulario){
+    const erros = [];
+    const texto = 'Informe ';
+
+    if (!formulario.descricao) {
+      erros.push(`${texto} a descrição`);
+    }
+
+    if (!formulario.valor) {
+      erros.push(`${texto} o valor`);
+    }
+
+    if (!formulario.mes) {
+      erros.push(`${texto} o mês`);
+    }
+
+    if (!formulario.ano) {
+      erros.push(`${texto} o ano`);
+    }
+
+    if (!formulario.tipo) {
+      erros.push(`${texto} o tipo`);
+    }
+
+    if (!formulario.status) {
+      erros.push(`${texto} o status`);
+    }
+
+    if (erros && erros.length > 0) {
+      throw new ErroValidacao(erros);
+    }
   }
 
   obterSaldo(id){
