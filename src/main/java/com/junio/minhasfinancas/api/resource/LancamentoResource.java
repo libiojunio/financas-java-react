@@ -141,7 +141,7 @@ public class LancamentoResource {
     return lancamento;
   }
 
-  @PutMapping("{id}/atualizarstatus")
+  @PutMapping("{id}/atualizarStatus")
   public ResponseEntity atualizarStatus(@PathVariable("id") Long id, @RequestBody LancamentoForm lancamentoForm){
     Optional<Lancamento> optiLancamento = lancamentoService.findById(id);
     if (optiLancamento.isPresent()) {

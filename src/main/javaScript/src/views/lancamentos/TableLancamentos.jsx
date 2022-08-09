@@ -26,6 +26,8 @@ class TableLancamentos extends React.Component {
           <td>{lancamento.statusLancamento}</td>
           {lancamento.id &&
             <td>
+              <Button descricao={'Cancelar'} className={'btn btn-success'} onClick={() => {this.props.cancelar(lancamento, "CANCELADO")}} />
+              <Button descricao={'Efetivar'} className={'btn btn-secondary'} onClick={() => {this.props.efetivar(lancamento, 'EFETIVADO')}} />
               <Button descricao={'Editar'} className={'btn btn-warning'} onClick={() => {this.props.editar(lancamento)}} />
               <Button descricao={'Deletar'} className={'btn btn-danger'} onClick={() => {this.props.deletar(lancamento)}} />
             </td>}
@@ -57,6 +59,8 @@ TableLancamentos.propTypes = {
   lancamentos: PropTypes.array.isRequired,
   deletar: PropTypes.func.isRequired,
   editar: PropTypes.func.isRequired,
+  cancelar: PropTypes.func.isRequired,
+  efetivar: PropTypes.func.isRequired,
 };
 
 export default TableLancamentos;

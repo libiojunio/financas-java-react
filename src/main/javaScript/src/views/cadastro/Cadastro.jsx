@@ -3,17 +3,13 @@ import Container from '../../componentes/Container';
 import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
-import {Link} from 'react-router-dom';
-import {REGEX_EMAIL, ROTA_CADASTRO_LANCAMENTOS, ROTA_LOGIN, STYLE_LINK} from '../../utils/constantes';
+import {ROTA_LOGIN} from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import UsuarioService from '../../services/usuario/UsuarioService';
 import {exibirMensagemErro, exibirMensagemErroApi, exibirMensagemSucesso} from '../../componentes/toastr';
 import {
-  MSG_ERRO_CAMPOS_VAZIOS,
-  MSG_ERRO_EMAIL_FORMATO_INVALIDO, MSG_ERRO_SENHA_MINIMOS_CARACTERES, MSG_ERRO_SENHAS_NAO_SAO_IGUAIS,
   MSG_USUARIO_CADASTRADO_COM_SUCESSO
 } from '../../utils/mensagens';
-import {formatarArrayDeStrings} from '../../utils/metodos';
 
 class Cadastro extends React.Component {
 

@@ -27,7 +27,6 @@ export function exibirMensagemErro(mensagem){
 }
 
 export function exibirMensagemErroApi(error){
-  console.log('error.response', error.response);
   if (error.response.status === 400) {
     exibirMensagemErro(error.response.data.message)
   }

@@ -8,6 +8,9 @@ export const MSG_LANCAMENTO_CADASTRADO_COM_SUCESSO = () => {
 export const MSG_LANCAMENTO_ATUALIZADO_COM_SUCESSO = () => {
   return `O lançamento foi atualizado com sucesso!`;
 };
+export const MSG_LANCAMENTO_STATUS_ATUALIZADO_COM_SUCESSO = () => {
+  return `O status do lançamento foi atualizado com sucesso!`;
+};
 export const MSG_ERRO_CAMPOS_VAZIOS = (campos) => {
   return `O(s) preechimento(s) do(s) campo(s) ${campos} são(é) obrigátorio.`
 };

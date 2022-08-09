@@ -11,7 +11,7 @@ import {
 import {withRouter} from '../../componentes/withRouter';
 import {exibirMensagemErro, exibirMensagemErroApi, exibirMensagemSucesso} from '../../componentes/toastr';
 import {
-  MSG_ERRO_CAMPOS_VAZIOS, MSG_SUCCESS_PADRAO,
+  MSG_ERRO_CAMPOS_VAZIOS, MSG_LANCAMENTO_STATUS_ATUALIZADO_COM_SUCESSO, MSG_SUCCESS_PADRAO,
 } from '../../utils/mensagens';
 import {formatarArrayDeStrings} from '../../utils/metodos';
 import LancamentoService from '../../services/lancamento/LancamentoService';
@@ -19,7 +19,6 @@ import Row from '../../componentes/Row';
 import FormSelect from '../../componentes/Form/FormSelect';
 import TableLancamentos from './TableLancamentos';
 import DialogSimNao from '../../componentes/DialogSimNao';
-import {Link} from 'react-router-dom';
 
 class ConsultaLancamentos extends React.Component {
 
@@ -87,6 +86,18 @@ class ConsultaLancamentos extends React.Component {
     this.visibleFalse();
   }
 
+  atualizarStatus = (lancamento, status) => {
+    this.lancamentoService.atualizarStatus(lancamento, status).then(() => {
+      const index = this.state.lancamentos.indexOf(lancamento);
+      const lancamentos = this.state.lancamentos;
+      lancamentos[index].statusLancamento = status;
+      this.setState({lancamentos})
+      exibirMensagemSucesso(MSG_LANCAMENTO_STATUS_ATUALIZADO_COM_SUCESSO());
+    }).catch((error) => {
+      exibirMensagemErroApi(error);
+    });
+  }
+
   onChange = (value) => {
     const state = this.state;
     state.formulario[value.target.id] = value.target.value;
@@ -139,7 +150,8 @@ class ConsultaLancamentos extends React.Component {
           </Row>
           <Row>
             <Container>
-              <TableLancamentos lancamentos={this.state.lancamentos} deletar={this.abrirModal} editar={this.rotaEditarLancamento}/>
+              <TableLancamentos cancelar={this.atualizarStatus} efetivar={this.atualizarStatus}
+                                lancamentos={this.state.lancamentos} deletar={this.abrirModal} editar={this.rotaEditarLancamento}/>
             </Container>
           </Row>
         </Card>
