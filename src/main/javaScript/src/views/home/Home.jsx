@@ -44,12 +44,10 @@ class Home extends React.Component {
         <p>E essa é sua área administrativa, utilize um dos menus ou botões abaixo para navegar pelo sistema.</p>
         <p className="lead">
           <Link to={ROTA_CADASTRO_USUARIOS} style={MARGIN_RIGHT_5PX} className="btn btn-primary btn-lg" role="button">
-            <i className="fa fa-users" ></i>
-            Cadastrar Usuário
+            <i className={'pi pi-user-plus'}></i> Cadastrar Usuário
           </Link>
           <Link to={ROTA_CONSULTA_LANCAMENTOS} className="btn btn-danger btn-lg" role="button">
-            <i className="fa fa-users"></i>
-            Cadastrar Lançamento
+            <i className={'pi pi-plus'}></i> Cadastrar Lançamento
           </Link>
         </p>
       </div>

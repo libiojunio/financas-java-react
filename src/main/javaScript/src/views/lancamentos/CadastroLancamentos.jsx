@@ -148,8 +148,8 @@ class CadastroLancamentos extends React.Component {
             </FormGroup>
           </Row>
           <Row>
-            <Button descricao={'Salvar'} className={'btn btn-success col-md-2'} style={STYLE_BTN_SALVAR} onClick={this.salvar}  />
-            <Button descricao={'Cancelar'} className={'btn btn-danger col-md-2'} onClick={this.rotaConsultarLancamento}/>
+            <Button descricao={<i className={'pi pi-save'}></i>} title={this.props.params.id ? 'Alterar' : 'Salvar'} className={'btn btn-success col-md-1'} style={STYLE_BTN_SALVAR} onClick={this.salvar}  />
+            <Button descricao={<i className={'pi pi-times'}></i>} title={'Cancelar'} className={'btn btn-danger col-md-1'} onClick={this.rotaConsultarLancamento}/>
           </Row>
         </Card>
       </Container>

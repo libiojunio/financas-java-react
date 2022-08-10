@@ -68,8 +68,10 @@ class Login extends React.Component {
                  type="password" className="form-control" id={idSenha} onChange={this.onChange}
                  placeholder="Digite a senha" value={this.state.inputSenha}/>
              </FormGroup>
-             <Button onClick={this.autenticar} descricao={'Entrar'} className={'btn btn-success'}/>
-             <Button descricao={'Cadastrar'} className={'btn btn-danger'} onClick={this.rotaCadastroUsuarios}/>
+             <Button descricao={<i className={'pi pi-save'}></i>} title={'Entrar'}
+                     onClick={this.autenticar} className={'btn btn-success'}/>
+             <Button descricao={<i className={'pi pi-user-plus'}></i>} title={'Cadastrar'}
+                     className={'btn btn-danger'} onClick={this.rotaCadastroUsuarios}/>
            </fieldset>
          </Card>
       </Container>
