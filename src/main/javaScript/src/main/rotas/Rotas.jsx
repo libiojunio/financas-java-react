@@ -12,6 +12,8 @@ import {
 } from '../../utils/constantes';
 import ConsultaLancamentos from '../../views/lancamentos/ConsultaLancamentos';
 import CadastroLancamentos from '../../views/lancamentos/CadastroLancamentos';
+import AuthService from '../../services/authService/AuthService';
+import {withRouter} from '../../componentes/withRouter';
 
 class Rotas extends React.Component {
   constructor(props) {
@@ -20,19 +22,35 @@ class Rotas extends React.Component {
   }
 
   render() {
-   return (
-     <Routes>
-        <Route path={ROTA_HOME} element={<Home />} />
-        <Route path={ROTA_LOGIN} element={<Login />} />
-        <Route path={ROTA_CADASTRO_USUARIOS} element={<Cadastro />} />
-        <Route path={ROTA_CONSULTA_LANCAMENTOS} element={<ConsultaLancamentos />} />
-        <Route path={ROTA_CADASTRO_LANCAMENTOS}>
-          <Route index element={<CadastroLancamentos />} />
-          <Route path=":id" element={<CadastroLancamentos />} />
-        </Route>
-    </Routes>
-   );
+    if (AuthService.isUsuarioAutenticado()){
+      return (
+        <Routes>
+          <Route path={ROTA_HOME} element={<Home />} />
+          <Route path={ROTA_LOGIN} element={<Login />} />
+          <Route path={ROTA_CADASTRO_USUARIOS} element={<Cadastro />} />
+          <Route path={ROTA_CONSULTA_LANCAMENTOS} element={<ConsultaLancamentos />} />
+          <Route path={ROTA_CADASTRO_LANCAMENTOS}>
+            <Route index element={<CadastroLancamentos />} />
+            <Route path=":id" element={<CadastroLancamentos />} />
+          </Route>
+        </Routes>
+      );
+    }
+    else {
+      if (
+        this.props.location.pathname !== ROTA_CADASTRO_USUARIOS &&
+        this.props.location.pathname !== ROTA_LOGIN){
+        this.props.navigate(ROTA_LOGIN);
+      }
+
+      return (
+        <Routes>
+          <Route path={ROTA_CADASTRO_USUARIOS} element={<Cadastro />} />
+          <Route path={ROTA_LOGIN} element={<Login />} />
+        </Routes>
+      );
+    }
   }
 }
 
-export default Rotas;
+export default withRouter(Rotas);

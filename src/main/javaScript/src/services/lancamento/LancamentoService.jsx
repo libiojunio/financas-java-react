@@ -1,6 +1,7 @@
 import ApiServices from '../outros/ApiServices';
 import LocalStorageService from '../outros/LocalStorageService';
 import ErroValidacao from '../exception/ErroValidacao';
+import {_USUARIO_LOGADO} from '../../utils/constantes';
 
 class LancamentoService extends ApiServices {
   constructor() {
@@ -45,7 +46,7 @@ class LancamentoService extends ApiServices {
   }
 
   buscar(formulario){
-    const usuario = `?usuario=${LocalStorageService.getItemObj('_usuario_logado').id}`;
+    const usuario = `?usuario=${LocalStorageService.getItemObj(_USUARIO_LOGADO).id}`;
     const mes = formulario.mes ? `&mes=${formulario.mes}` : '';
     const ano = formulario.ano ? `&ano=${formulario.ano}` : '';
     const tipo = formulario.tipo ? `&tipo=${formulario.tipo}` : '';
@@ -55,7 +56,7 @@ class LancamentoService extends ApiServices {
   }
 
   buscarLancamentoId(id){
-    const usuario = `?usuarioId=${LocalStorageService.getItemObj('_usuario_logado').id}`;
+    const usuario = `?usuarioId=${LocalStorageService.getItemObj(_USUARIO_LOGADO).id}`;
     return this.get(`/buscarLancamentoId/${usuario}&lancamentoId=${id}`);
   }
 

@@ -6,6 +6,7 @@ import Row from '../../componentes/Row';
 import FormGroup from '../../componentes/Form/FormGroup';
 import FormSelect from '../../componentes/Form/FormSelect';
 import {
+  _USUARIO_LOGADO,
   GET_LISTA_ANOS,
   GET_LISTA_OBJETO_MESES,
   ROTA_CONSULTA_LANCAMENTOS,
@@ -33,7 +34,7 @@ class CadastroLancamentos extends React.Component {
     super(props);
     const now = new Date();
     // eslint-disable-next-line no-underscore-dangle
-    const _usuario_logado = LocalStorageService.getItemObj('_usuario_logado');
+    const _usuario_logado = LocalStorageService.getItemObj(_USUARIO_LOGADO);
     this.state = {
       formulario: {
         id: null,

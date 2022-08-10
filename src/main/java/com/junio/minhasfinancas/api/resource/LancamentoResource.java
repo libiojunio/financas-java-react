@@ -167,11 +167,13 @@ public class LancamentoResource {
       List<Lancamento> lancamentoList = lancamentoService.buscar(lancamentoFilter);
 
       for (Lancamento lancamento : lancamentoList) {
-        if (lancamento.getTipo().equals(TipoLancamento.RECEITA)) {
-          receita = receita.add(lancamento.getValor());
-        }
-        else {
-          despesa = despesa.add(lancamento.getValor());
+        if (lancamento.getStatusLancamento().equals(StatusLancamento.EFETIVADO)){
+          if (lancamento.getTipo().equals(TipoLancamento.RECEITA)) {
+            receita = receita.add(lancamento.getValor());
+          }
+          else {
+            despesa = despesa.add(lancamento.getValor());
+          }
         }
       }
       return ResponseEntity.ok(receita.subtract(despesa));

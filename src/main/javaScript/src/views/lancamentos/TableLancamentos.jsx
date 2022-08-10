@@ -12,7 +12,6 @@ class TableLancamentos extends React.Component {
   }
 
   render() {
-    console.log('this.props.lancamentos', this.props.lancamentos);
     const rows = this.props.lancamentos.map((lancamento) => {
       let mes = {};
       if (lancamento.mes) {

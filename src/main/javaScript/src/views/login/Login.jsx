@@ -3,7 +3,7 @@ import Container from '../../componentes/Container';
 import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
-import {ROTA_CADASTRO_USUARIOS, ROTA_HOME} from '../../utils/constantes';
+import {_USUARIO_LOGADO, ROTA_CADASTRO_USUARIOS, ROTA_HOME} from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import usuarioService from '../../services/usuario/UsuarioService';
 import LocalStorageService from '../../services/outros/LocalStorageService';
@@ -32,7 +32,7 @@ class Login extends React.Component {
       senha: this.state.inputSenha
     };
     this.usuarioService.autenticar(emailSenha).then((response) => {
-      LocalStorageService.setItem('_usuario_logado', JSON.stringify(response.data));
+      LocalStorageService.setItem(_USUARIO_LOGADO, JSON.stringify(response.data));
       exibirMensagemSucesso(MSG_USUARIO_AUTENTICADO_COM_SUCESSO);
       this.props.navigate(ROTA_HOME);
     }).catch((error) => {

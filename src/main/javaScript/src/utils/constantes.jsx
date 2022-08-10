@@ -54,3 +54,6 @@ export const STATUS = [
   {id: 'EFETIVADO', descricao: 'Efetivado'},
   {id: 'PENDENTE', descricao: 'Pendente'},
 ];
+
+// eslint-disable-next-line no-underscore-dangle
+export const _USUARIO_LOGADO = '_usuario_logado';

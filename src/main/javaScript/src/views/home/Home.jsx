@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {
+  _USUARIO_LOGADO,
   MARGIN_RIGHT_5PX,
   ROTA_CADASTRO_USUARIOS,
   ROTA_CONSULTA_LANCAMENTOS,
@@ -22,7 +23,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     // eslint-disable-next-line no-underscore-dangle
-    const _usuario_logado = LocalStorageService.getItemObj('_usuario_logado');
+    const _usuario_logado = LocalStorageService.getItemObj(_USUARIO_LOGADO);
     if (_usuario_logado && _usuario_logado.id) {
       this.lancamentoService.obterSaldo(_usuario_logado.id).then((response) => {
         this.setState({saldo: response.data});

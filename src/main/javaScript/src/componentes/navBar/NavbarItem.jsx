@@ -11,7 +11,7 @@ class NavbarItem extends React.Component {
   render() {
     return(
       <li className="nav-item">
-        <Link className="nav-link" to={this.props.href}>{this.props.label}</Link>
+        <Link className="nav-link" to={this.props.href} onClick={this.props.onClick}>{this.props.label}</Link>
       </li>
     );
   }
@@ -21,6 +21,7 @@ class NavbarItem extends React.Component {
 NavbarItem.propTypes = {
   href: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default NavbarItem;
