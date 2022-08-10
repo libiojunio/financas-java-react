@@ -144,8 +144,8 @@ class ConsultaLancamentos extends React.Component {
                   type="text" className="form-control" id={idDescricao} name={idDescricao} onChange={this.onChange}
                   placeholder="Digite a descrição" value={this.state.formulario.descricao} />
               </FormGroup>
-              <Button title={'Buscar'} descricao={<i className={'pi pi-search-plus'}></i>} className={'btn btn-success'} onClick={this.buscar} />
-              <Button title={'Cadastrar'} descricao={<i className={'pi pi-plus'}></i>} className={'btn btn-warning'} onClick={this.rotaCadastrarLancamento}/>
+              <Button title={'Buscar'} descricao={<i className={'pi pi-search-plus'}> Buscar</i>} className={'btn btn-success'} onClick={this.buscar} />
+              <Button title={'Cadastrar'} descricao={<i className={'pi pi-plus'}> Cadastrar</i>} className={'btn btn-warning'} onClick={this.rotaCadastrarLancamento}/>
             </Container>
           </Row>
           <Row>

@@ -85,8 +85,8 @@ class Cadastro extends React.Component {
               type="password" className="form-control" id={idSenhaRepeticao} name={'senhaRepeticao'} onChange={this.onChange}
               placeholder="Digite a senha novamente" value={this.state.formulario.senhaRepeticao} />
           </FormGroup>
-          <Button descricao={<i className={'pi pi-save'}></i>} title={'Salvar'} className={'btn btn-success'} onClick={this.salvar} />
-          <Button descricao={<i className={'pi pi-times'}></i>} title={'Cancelar'} className={'btn btn-danger'} onClick={this.rotaLogin} />
+          <Button descricao={<i className={'pi pi-save'}> Salvar</i>} title={'Salvar'} className={'btn btn-success'} onClick={this.salvar} />
+          <Button descricao={<i className={'pi pi-times'}> Cancelar</i>} title={'Cancelar'} className={'btn btn-danger'} onClick={this.rotaLogin} />
         </Card>
       </Container>
     );
