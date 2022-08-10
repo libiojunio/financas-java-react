@@ -3,8 +3,7 @@ import Container from '../../componentes/Container';
 import Card from '../../componentes/Card';
 import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
-import {Link} from 'react-router-dom';
-import {ROTA_CADASTRO_USUARIOS, ROTA_HOME, ROTA_LOGIN, STYLE_LINK} from '../../utils/constantes';
+import {ROTA_CADASTRO_USUARIOS, ROTA_HOME} from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
 import usuarioService from '../../services/usuario/UsuarioService';
 import LocalStorageService from '../../services/outros/LocalStorageService';
@@ -33,23 +32,23 @@ class Login extends React.Component {
       senha: this.state.inputSenha
     };
     this.usuarioService.autenticar(emailSenha).then((response) => {
-      LocalStorageService.setItem('_usuario_logado', JSON.stringify(response.data))
-      exibirMensagemSucesso(MSG_USUARIO_AUTENTICADO_COM_SUCESSO)
-      this.props.navigate(ROTA_HOME)
+      LocalStorageService.setItem('_usuario_logado', JSON.stringify(response.data));
+      exibirMensagemSucesso(MSG_USUARIO_AUTENTICADO_COM_SUCESSO);
+      this.props.navigate(ROTA_HOME);
     }).catch((error) => {
-      exibirMensagemErroApi(error)
+      exibirMensagemErroApi(error);
     });
-  }
+  };
 
   onChange = (value) => {
     const state = this.state;
     state[value.target.id] = value.target.value;
     this.setState(state);
-  }
+  };
 
   rotaCadastroUsuarios = () => {
     this.props.navigate(ROTA_CADASTRO_USUARIOS);
-  }
+  };
 
   render() {
     const idEmail = 'inputEmail';
@@ -74,7 +73,7 @@ class Login extends React.Component {
            </fieldset>
          </Card>
       </Container>
-    )
+    );
   }
 }
 

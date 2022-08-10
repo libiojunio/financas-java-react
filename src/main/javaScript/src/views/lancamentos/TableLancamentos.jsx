@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import currencyFormatter from 'currency-formatter';
-import {GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS} from '../../utils/constantes';
+import {GET_LISTA_OBJETO_MESES} from '../../utils/constantes';
 import Button from '../../componentes/Button';
 
 class TableLancamentos extends React.Component {
@@ -12,10 +12,13 @@ class TableLancamentos extends React.Component {
   }
 
   render() {
+    console.log('this.props.lancamentos', this.props.lancamentos);
     const rows = this.props.lancamentos.map((lancamento) => {
       let mes = {};
       if (lancamento.mes) {
-        mes = GET_LISTA_OBJETO_MESES.filter((mes) => {return mes.id === lancamento.mes})[0];
+        mes = GET_LISTA_OBJETO_MESES.filter((mes) => {
+          return mes.id === lancamento.mes;
+        })[0];
       }
       return (
         <tr key={lancamento.id}>
@@ -26,14 +29,29 @@ class TableLancamentos extends React.Component {
           <td>{lancamento.statusLancamento}</td>
           {lancamento.id &&
             <td>
-              <Button descricao={'Cancelar'} className={'btn btn-success'} onClick={() => {this.props.cancelar(lancamento, "CANCELADO")}} />
-              <Button descricao={'Efetivar'} className={'btn btn-secondary'} onClick={() => {this.props.efetivar(lancamento, 'EFETIVADO')}} />
-              <Button descricao={'Editar'} className={'btn btn-warning'} onClick={() => {this.props.editar(lancamento)}} />
-              <Button descricao={'Deletar'} className={'btn btn-danger'} onClick={() => {this.props.deletar(lancamento)}} />
+              <Button descricao={<i className={'pi pi-check'}></i>} className={'btn btn-success'}
+                      onClick={() => {
+                        this.props.efetivar(lancamento, 'EFETIVADO');
+                      }} title={'Efetivar'} disabled={lancamento.statusLancamento === 'EFETIVADO'} />
+
+              <Button descricao={<i className={'pi pi-times'}></i>} className={'btn btn-secondary'}
+                      onClick={() => {
+                        this.props.cancelar(lancamento, 'CANCELADO');
+                      }} title={'Cancelar'} disabled={lancamento.statusLancamento === 'CANCELADO'} />
+
+              <Button descricao={<i className={'pi pi-pencil'}></i>} className={'btn btn-warning'}
+                      onClick={() => {
+                        this.props.editar(lancamento);
+                      }} title={'Editar'} />
+
+              <Button descricao={<i className={'pi pi-trash'}></i>} className={'btn btn-danger'}
+                      onClick={() => {
+                        this.props.deletar(lancamento);
+                      }} title={'Excluir'} />
             </td>}
         </tr>
       );
-    })
+    });
 
     return (
      <table className={'table table-hover'}>
@@ -51,7 +69,7 @@ class TableLancamentos extends React.Component {
         {rows}
        </tbody>
      </table>
-    )
+    );
   }
 }
 

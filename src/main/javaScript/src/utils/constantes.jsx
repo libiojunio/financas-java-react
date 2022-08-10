@@ -1,10 +1,11 @@
 export const STYLE_LINK = {
   color: 'white',
   textDecoration: 'none'
-}
+};
+
 export const MARGIN_RIGHT_5PX = {
   'marginRight': '5px'
-}
+};
 
 export const REGEX_EMAIL = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/;
 
@@ -26,7 +27,7 @@ export const GET_LISTA_ANOS = (anoInicial = 1970, final) => {
     });
   }
   return ano;
-}
+};
 
 export const GET_LISTA_OBJETO_MESES = [
   {id: 1, descricao: 'Janeiro'},
@@ -41,7 +42,7 @@ export const GET_LISTA_OBJETO_MESES = [
   {id: 10, descricao: 'Outubro'},
   {id: 11, descricao: 'Novembro'},
   {id: 12, descricao: 'Dezembro'},
-]
+];
 
 export const TIPO_LANCAMENTO = [
   {id: 'DESPESA', descricao: 'Despesa'},

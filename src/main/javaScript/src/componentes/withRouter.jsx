@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const withRouter = (Component) => {
   const Wrapper = (props) => {
     const navigate = useNavigate();
 
     return (
+      // eslint-disable-next-line react/react-in-jsx-scope
       <Component
         navigate={navigate}
         params={useParams()}

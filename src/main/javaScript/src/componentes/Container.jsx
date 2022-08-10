@@ -33,7 +33,7 @@ class Container extends React.Component {
           </div>
         }
       </>
-    )
+    );
   }
 
 }

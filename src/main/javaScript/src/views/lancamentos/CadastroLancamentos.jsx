@@ -7,18 +7,16 @@ import FormGroup from '../../componentes/Form/FormGroup';
 import FormSelect from '../../componentes/Form/FormSelect';
 import {
   GET_LISTA_ANOS,
-  GET_LISTA_OBJETO_MESES, GO_BACK, ROTA_CADASTRO_LANCAMENTOS,
+  GET_LISTA_OBJETO_MESES,
   ROTA_CONSULTA_LANCAMENTOS,
   STATUS,
   TIPO_LANCAMENTO
 } from '../../utils/constantes';
 import Button from '../../componentes/Button';
 import {
-  MSG_ERRO_CAMPOS_VAZIOS, MSG_ERRO_DESCRICAO_MINIMOS_CARACTERES,
-  MSG_ERRO_VALOR_NAO_E_UM_NUMERO, MSG_LANCAMENTO_ATUALIZADO_COM_SUCESSO,
+  MSG_LANCAMENTO_ATUALIZADO_COM_SUCESSO,
   MSG_LANCAMENTO_CADASTRADO_COM_SUCESSO,
 } from '../../utils/mensagens';
-import {formatarArrayDeStrings} from '../../utils/metodos';
 import {exibirMensagemErro, exibirMensagemErroApi, exibirMensagemSucesso} from '../../componentes/toastr';
 import LocalStorageService from '../../services/outros/LocalStorageService';
 import Card from '../../componentes/Card';
@@ -34,6 +32,7 @@ class CadastroLancamentos extends React.Component {
   constructor(props) {
     super(props);
     const now = new Date();
+    // eslint-disable-next-line no-underscore-dangle
     const _usuario_logado = LocalStorageService.getItemObj('_usuario_logado');
     this.state = {
       formulario: {
@@ -66,7 +65,7 @@ class CadastroLancamentos extends React.Component {
           }
         });
       }).catch((error) => {
-        exibirMensagemErroApi(error)
+        exibirMensagemErroApi(error);
       });
     }
   }
@@ -79,7 +78,7 @@ class CadastroLancamentos extends React.Component {
           exibirMensagemSucesso(MSG_LANCAMENTO_ATUALIZADO_COM_SUCESSO());
           this.props.navigate(ROTA_CONSULTA_LANCAMENTOS);
         }).catch((error) => {
-          exibirMensagemErroApi(error)
+          exibirMensagemErroApi(error);
         });
       }
       else {
@@ -87,32 +86,33 @@ class CadastroLancamentos extends React.Component {
           exibirMensagemSucesso(MSG_LANCAMENTO_CADASTRADO_COM_SUCESSO());
           this.props.navigate(ROTA_CONSULTA_LANCAMENTOS);
         }).catch((error) => {
-          exibirMensagemErroApi(error)
+          exibirMensagemErroApi(error);
         });
       }
-    } catch (e) {
+    }
+    catch (e) {
       e.mensagens.forEach(msg => exibirMensagemErro(msg));
     }
-  }
+  };
 
   onChange = (value) => {
     const state = this.state;
     state.formulario[value.target.id] = value.target.value;
     this.setState(state);
-  }
+  };
 
   rotaConsultarLancamento = () => {
     this.props.navigate(ROTA_CONSULTA_LANCAMENTOS);
-  }
+  };
 
   render() {
-    const idValor = 'valor'
-    const idDescricao = 'descricao'
+    const idValor = 'valor';
+    const idDescricao = 'descricao';
     const idTipo = 'tipo';
     const idStatus = 'status';
     const idAno = 'ano';
     const idMes = 'mes';
-    const isCadastrando = !this.props.params.id
+    const isCadastrando = !this.props.params.id;
     const tituloCard = isCadastrando ? 'Cadastrar' : 'Atualizar';
 
     return (
@@ -153,7 +153,7 @@ class CadastroLancamentos extends React.Component {
           </Row>
         </Card>
       </Container>
-    )
+    );
   }
 }
 

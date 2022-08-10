@@ -15,10 +15,10 @@ class FormSelect extends React.Component {
               id={this.props.id} name={this.props.id} onChange={this.props.onChange}>
         {campoVazio}
         {this.props.itens.map((item) => {
-          return <option value={item.id} key={item.id}>{item.descricao}</option>
+          return <option value={item.id} key={item.id}>{item.descricao}</option>;
         })}
       </select>
-    )
+    );
   }
 }
 

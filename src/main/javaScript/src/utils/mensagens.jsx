@@ -3,16 +3,16 @@ export const MSG_USUARIO_CADASTRADO_COM_SUCESSO = (nome) => {
   return `O usuário ${nome} foi cadastrado com sucesso, Faça login!`;
 };
 export const MSG_LANCAMENTO_CADASTRADO_COM_SUCESSO = () => {
-  return `O lançamento foi cadastrado com sucesso!`;
+  return 'O lançamento foi cadastrado com sucesso!';
 };
 export const MSG_LANCAMENTO_ATUALIZADO_COM_SUCESSO = () => {
-  return `O lançamento foi atualizado com sucesso!`;
+  return 'O lançamento foi atualizado com sucesso!';
 };
 export const MSG_LANCAMENTO_STATUS_ATUALIZADO_COM_SUCESSO = () => {
-  return `O status do lançamento foi atualizado com sucesso!`;
+  return 'O status do lançamento foi atualizado com sucesso!';
 };
 export const MSG_ERRO_CAMPOS_VAZIOS = (campos) => {
-  return `O(s) preechimento(s) do(s) campo(s) ${campos} são(é) obrigátorio.`
+  return `O(s) preechimento(s) do(s) campo(s) ${campos} são(é) obrigátorio.`;
 };
 export const MSG_SUCCESS_PADRAO = 'Operação realizada com sucesso!';
 

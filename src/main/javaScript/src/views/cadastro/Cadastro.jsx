@@ -35,25 +35,26 @@ class Cadastro extends React.Component {
     try {
       this.usuarioService.validarFormularioUsuario(this.state.formulario);
       this.usuarioService.salvar(this.state.formulario).then(() => {
-        exibirMensagemSucesso(MSG_USUARIO_CADASTRADO_COM_SUCESSO(this.state.formulario.nome))
+        exibirMensagemSucesso(MSG_USUARIO_CADASTRADO_COM_SUCESSO(this.state.formulario.nome));
         this.props.navigate(ROTA_LOGIN);
       }).catch((error) => {
-        exibirMensagemErroApi(error)
+        exibirMensagemErroApi(error);
       });
-    } catch (e) {
+    }
+    catch (e) {
       e.mensagens.forEach(msg => exibirMensagemErro(msg));
     }
-  }
+  };
 
   onChange = (value) => {
     const state = this.state;
     state.formulario[value.target.id] = value.target.value;
     this.setState(state);
-  }
+  };
 
   rotaLogin = () => {
     this.props.navigate(ROTA_LOGIN);
-  }
+  };
 
   render() {
     const idNome = 'nome';
@@ -88,7 +89,7 @@ class Cadastro extends React.Component {
           <Button descricao={'Cancelar'} className={'btn btn-danger'} onClick={this.rotaLogin} />
         </Card>
       </Container>
-    )
+    );
   }
 }
 

@@ -5,7 +5,7 @@ import FormGroup from '../../componentes/Form/FormGroup';
 import Button from '../../componentes/Button';
 import {
   GET_LISTA_ANOS,
-  GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS, ROTA_CONSULTA_LANCAMENTOS, STYLE_LINK,
+  GET_LISTA_OBJETO_MESES, ROTA_CADASTRO_LANCAMENTOS,
   TIPO_LANCAMENTO
 } from '../../utils/constantes';
 import {withRouter} from '../../componentes/withRouter';
@@ -46,11 +46,11 @@ class ConsultaLancamentos extends React.Component {
 
   rotaCadastrarLancamento = () => {
     this.props.navigate(ROTA_CADASTRO_LANCAMENTOS);
-  }
+  };
 
   rotaEditarLancamento = (lancamento) => {
     this.props.navigate(`${ROTA_CADASTRO_LANCAMENTOS}/${lancamento.id}`);
-  }
+  };
 
   buscar = () => {
     const msgError = this.validarFormulario();
@@ -59,19 +59,19 @@ class ConsultaLancamentos extends React.Component {
     }
     this.lancamentoService.buscar(this.state.formulario).then((response) => {
       exibirMensagemSucesso(MSG_SUCCESS_PADRAO);
-      this.setState({lancamentos: response.data})
+      this.setState({lancamentos: response.data});
     }).catch((error) => {
-      exibirMensagemErroApi(error)
+      exibirMensagemErroApi(error);
     });
-  }
+  };
 
   abrirModal = (lancamento) => {
     this.setState({visible: true, lancamento});
-  }
+  };
 
   visibleFalse = () => {
     this.setState({visible: false});
-  }
+  };
 
   deletar = () => {
     this.lancamentoService.deletar(`/${this.state.lancamento.id}`).then(() => {
@@ -84,32 +84,32 @@ class ConsultaLancamentos extends React.Component {
       exibirMensagemErroApi(error);
     });
     this.visibleFalse();
-  }
+  };
 
   atualizarStatus = (lancamento, status) => {
     this.lancamentoService.atualizarStatus(lancamento, status).then(() => {
       const index = this.state.lancamentos.indexOf(lancamento);
       const lancamentos = this.state.lancamentos;
       lancamentos[index].statusLancamento = status;
-      this.setState({lancamentos})
+      this.setState({lancamentos});
       exibirMensagemSucesso(MSG_LANCAMENTO_STATUS_ATUALIZADO_COM_SUCESSO());
     }).catch((error) => {
       exibirMensagemErroApi(error);
     });
-  }
+  };
 
   onChange = (value) => {
     const state = this.state;
     state.formulario[value.target.id] = value.target.value;
     this.setState(state);
-  }
+  };
 
   validarFormulario = () => {
     const camposVazios = [];
     const { formulario } = this.state;
 
     if (!formulario.ano) {
-      camposVazios.push('Ano')
+      camposVazios.push('Ano');
     }
 
     if (camposVazios.length > 0) {
@@ -117,7 +117,7 @@ class ConsultaLancamentos extends React.Component {
     }
 
     return false;
-  }
+  };
 
   render() {
     const idTipo = 'tipo';
@@ -156,10 +156,11 @@ class ConsultaLancamentos extends React.Component {
           </Row>
         </Card>
         <DialogSimNao visible={this.state.visible} simFunc={this.deletar} onHide={this.visibleFalse} style={{width: '50%'}} >
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
           <h4>Confirma a exclusão do lancamento '{this.state.lancamento.descricao}' ?</h4>
         </DialogSimNao>
       </Container>
-    )
+    );
   }
 }
 

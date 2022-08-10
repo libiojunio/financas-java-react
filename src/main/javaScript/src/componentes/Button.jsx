@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import {ROTA_CONSULTA_LANCAMENTOS, STYLE_LINK} from '../utils/constantes';
 
 class Button extends React.Component {
   constructor(props) {
@@ -16,10 +14,11 @@ class Button extends React.Component {
   render() {
     const style = this.props.style || this.state.style;
     return(
-      <button className={this.props.className} onClick={this.props.onClick} style={style}>
+      <button className={this.props.className} onClick={this.props.onClick} style={style}
+              title={this.props.title} disabled={this.props.disabled}>
         {this.props.descricao}
       </button>
-    )
+    );
   }
 }
 
@@ -28,6 +27,8 @@ Button.propTypes = {
   className: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   link: PropTypes.string,
+  title: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 export default Button;

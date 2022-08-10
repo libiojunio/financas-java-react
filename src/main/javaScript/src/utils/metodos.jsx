@@ -17,7 +17,7 @@ export const formatarArrayDeStrings = (campos) => {
     }
   });
   return camposFormatados;
-}
+};
 
 
 

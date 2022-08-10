@@ -13,7 +13,7 @@ class FormGroup extends React.Component {
         <label htmlFor={this.props.htmlFor}>{this.props.label}</label>
         {this.props.children}
       </div>
-    )
+    );
   }
 }
 

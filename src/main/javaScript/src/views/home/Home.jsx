@@ -21,14 +21,15 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    // eslint-disable-next-line no-underscore-dangle
     const _usuario_logado = LocalStorageService.getItemObj('_usuario_logado');
     if (_usuario_logado && _usuario_logado.id) {
       this.lancamentoService.obterSaldo(_usuario_logado.id).then((response) => {
-        this.setState({saldo: response.data})
+        this.setState({saldo: response.data});
       });
     }
     else {
-      this.setState({saldo: 0})
+      this.setState({saldo: 0});
     }
   }
 
@@ -52,7 +53,7 @@ class Home extends React.Component {
           </Link>
         </p>
       </div>
-    )
+    );
   }
 }
 

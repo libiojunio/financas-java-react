@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route } from 'react-router-dom';
 import Login from '../../views/login/Login';
 import Cadastro from '../../views/cadastro/Cadastro';
 import Home from '../../views/home/Home';
@@ -31,7 +31,7 @@ class Rotas extends React.Component {
           <Route path=":id" element={<CadastroLancamentos />} />
         </Route>
     </Routes>
-   )
+   );
   }
 }
 

@@ -17,19 +17,19 @@ class UsuarioService extends ApiServices {
     const texto = 'Informe ';
 
     if (!formulario.nome) {
-      erros.push(`${texto} o nome`)
+      erros.push(`${texto} o nome`);
     }
 
     if (!formulario.email) {
-      erros.push(`${texto} o email`)
+      erros.push(`${texto} o email`);
     }
 
     if (!formulario.senha) {
-      erros.push(`${texto} a senha`)
+      erros.push(`${texto} a senha`);
     }
 
     if (!formulario.senhaRepeticao) {
-      erros.push(`Repita a senha`)
+      erros.push('Repita a senha');
     }
 
     if (!formulario.email.match(REGEX_EMAIL)) {
@@ -54,7 +54,7 @@ class UsuarioService extends ApiServices {
   }
 
   salvar(usuario){
-    return this.post('/', usuario)
+    return this.post('/', usuario);
   }
 }
 

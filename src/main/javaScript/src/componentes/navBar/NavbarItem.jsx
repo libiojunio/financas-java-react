@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 class NavbarItem extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class NavbarItem extends React.Component {
       <li className="nav-item">
         <Link className="nav-link" to={this.props.href}>{this.props.label}</Link>
       </li>
-    )
+    );
   }
 
 }

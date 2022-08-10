@@ -12,7 +12,7 @@ class Row extends React.Component {
       <div className={'row'} style={this.props.style}>
         {this.props.children}
       </div>
-    )
+    );
   }
 }
 

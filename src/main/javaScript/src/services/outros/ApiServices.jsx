@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const urlBase = 'http://localhost:8080/'
+export const urlBase = 'http://localhost:8080/';
 
 export default class ApiServices {
 
@@ -11,11 +11,11 @@ export default class ApiServices {
   post(url, obj) {
     return axios.post(`${this.urlFinal}${url}`, obj);
   }
-  
+
   put(url, obj) {
     return axios.put(`${this.urlFinal}${url}`, obj);
   }
-  
+
   delete(url) {
     return axios.delete(`${this.urlFinal}${url}`);
   }

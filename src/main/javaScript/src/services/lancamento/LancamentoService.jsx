@@ -47,8 +47,8 @@ class LancamentoService extends ApiServices {
   buscar(formulario){
     const usuario = `?usuario=${LocalStorageService.getItemObj('_usuario_logado').id}`;
     const mes = formulario.mes ? `&mes=${formulario.mes}` : '';
-    const ano = formulario.ano ? `&ano=${formulario.ano}` : ''
-    const tipo = formulario.tipo ? `&tipo=${formulario.tipo}` : ''
+    const ano = formulario.ano ? `&ano=${formulario.ano}` : '';
+    const tipo = formulario.tipo ? `&tipo=${formulario.tipo}` : '';
     const descricao = formulario.descricao ? `&descricao=${formulario.descricao}` : '';
 
     return this.get(`/${usuario}${mes}${ano}${descricao}${tipo}`);
@@ -60,15 +60,15 @@ class LancamentoService extends ApiServices {
   }
 
   salvar(lancamento){
-    return this.post('/', lancamento)
+    return this.post('/', lancamento);
   }
 
   editar(lancamento){
-    return this.put(`/${lancamento.id}`, lancamento)
+    return this.put(`/${lancamento.id}`, lancamento);
   }
 
   atualizarStatus(lancamento, status){
-    return this.put(`/${lancamento.id}/atualizarStatus`, {status})
+    return this.put(`/${lancamento.id}/atualizarStatus`, {status});
   }
 
   deletar(url) {
