@@ -7,15 +7,13 @@ import AuthService from '../../services/authService/AuthService';
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isUsuarioAutenticado: AuthService.isUsuarioAutenticado()
-    };
+    this.state = {};
   }
 
-  sair() {
+  logout = () => {
     AuthService.limparDadosUsuarioLogado();
-    this.setState({isUsuarioAutenticado: AuthService.isUsuarioAutenticado()});
-  }
+    this.props.setIsUsuarioAutenticado();
+  };
 
   render() {
     return(
@@ -32,8 +30,8 @@ class Navbar extends React.Component {
                 <NavbarItem href={'/'} label={'Home'} />
                 <NavbarItem href={ROTA_CADASTRO_USUARIOS} label={'Usuários'} />
                 <NavbarItem href={ROTA_CONSULTA_LANCAMENTOS} label={'Lançamentos'} />
-                {this.state.isUsuarioAutenticado ?
-                  <NavbarItem href={ROTA_LOGIN} label={'Sair'} onClick={this.sair} /> :
+                {this.props.isUsuarioAutenticado ?
+                  <NavbarItem href={ROTA_LOGIN} label={'Sair'} onClick={this.logout} /> :
                   <NavbarItem href={ROTA_LOGIN} label={'Login'} />}
               </ul>
             </div>

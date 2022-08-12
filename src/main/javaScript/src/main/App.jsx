@@ -9,18 +9,27 @@ import 'primeicons/primeicons.css';
 import Rotas from './rotas/Rotas';
 import Container from '../componentes/Container';
 import NavBar from '../componentes/navBar/Navbar';
+import AuthService from '../services/authService/AuthService';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isUsuarioAutenticado: AuthService.isUsuarioAutenticado(),
+    };
   }
+
+  setIsUsuarioAutenticado = () => {
+    this.setState({isUsuarioAutenticado: AuthService.isUsuarioAutenticado()});
+  };
 
   render() {
     return (
       <Container>
-        <NavBar />
-        <Rotas />
+        <NavBar isUsuarioAutenticado={this.state.isUsuarioAutenticado}
+                setIsUsuarioAutenticado={this.setIsUsuarioAutenticado} />
+        <Rotas isUsuarioAutenticado={this.state.isUsuarioAutenticado}
+               setIsUsuarioAutenticado={this.setIsUsuarioAutenticado}/>
       </Container>
     );
   }

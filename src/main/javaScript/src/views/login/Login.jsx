@@ -17,8 +17,10 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputEmail: '',
-      inputSenha: '',
+      formulario: {
+        email: '',
+        senha: '',
+      },
       style: {
         position: 'relative',
         left: '300px'
@@ -27,12 +29,9 @@ class Login extends React.Component {
   }
 
   autenticar = () => {
-    const emailSenha = {
-      email: this.state.inputEmail,
-      senha: this.state.inputSenha
-    };
-    this.usuarioService.autenticar(emailSenha).then((response) => {
+    this.usuarioService.autenticar(this.state.formulario).then((response) => {
       LocalStorageService.setItem(_USUARIO_LOGADO, JSON.stringify(response.data));
+      this.props.setIsUsuarioAutenticado();
       exibirMensagemSucesso(MSG_USUARIO_AUTENTICADO_COM_SUCESSO);
       this.props.navigate(ROTA_HOME);
     }).catch((error) => {
@@ -42,7 +41,7 @@ class Login extends React.Component {
 
   onChange = (value) => {
     const state = this.state;
-    state[value.target.id] = value.target.value;
+    state.formulario[value.target.id] = value.target.value;
     this.setState(state);
   };
 
@@ -51,8 +50,8 @@ class Login extends React.Component {
   };
 
   render() {
-    const idEmail = 'inputEmail';
-    const idSenha = 'inputSenha';
+    const idEmail = 'email';
+    const idSenha = 'senha';
 
     return (
       <Container tipo={'bsDocs'}>
@@ -61,12 +60,12 @@ class Login extends React.Component {
              <FormGroup label={'Email: *'} htmlFor={idEmail}>
                <input
                  type="email" className="form-control" id={idEmail} onChange={this.onChange}
-                 aria-describedby="emailHelp" placeholder="Digite o email" value={this.state.inputEmail} />
+                 aria-describedby="emailHelp" placeholder="Digite o email" value={this.state.formulario.email} />
              </FormGroup>
              <FormGroup label={'Senha: *'} htmlFor={idSenha}>
                <input
                  type="password" className="form-control" id={idSenha} onChange={this.onChange}
-                 placeholder="Digite a senha" value={this.state.inputSenha}/>
+                 placeholder="Digite a senha" value={this.state.formulario.senha}/>
              </FormGroup>
              <Button descricao={<i className={'pi pi-save'}> Entrar</i>} title={'Entrar'}
                      onClick={this.autenticar} className={'btn btn-success'}/>

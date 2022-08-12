@@ -5,7 +5,7 @@ class AuthService {
 
   static isUsuarioAutenticado(){
     const usuario = LocalStorageService.getItemObj(_USUARIO_LOGADO);
-    return usuario && usuario.id;
+    return !!(usuario && usuario.id);
   }
 
   static limparDadosUsuarioLogado(){

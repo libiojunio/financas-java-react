@@ -12,7 +12,6 @@ import {
 } from '../../utils/constantes';
 import ConsultaLancamentos from '../../views/lancamentos/ConsultaLancamentos';
 import CadastroLancamentos from '../../views/lancamentos/CadastroLancamentos';
-import AuthService from '../../services/authService/AuthService';
 import {withRouter} from '../../componentes/withRouter';
 
 class Rotas extends React.Component {
@@ -22,11 +21,12 @@ class Rotas extends React.Component {
   }
 
   render() {
-    if (AuthService.isUsuarioAutenticado()){
+    if (this.props.isUsuarioAutenticado){
       return (
         <Routes>
           <Route path={ROTA_HOME} element={<Home />} />
-          <Route path={ROTA_LOGIN} element={<Login />} />
+          <Route path={ROTA_LOGIN}
+                 element={<Login setIsUsuarioAutenticado={this.props.setIsUsuarioAutenticado}/>} />
           <Route path={ROTA_CADASTRO_USUARIOS} element={<Cadastro />} />
           <Route path={ROTA_CONSULTA_LANCAMENTOS} element={<ConsultaLancamentos />} />
           <Route path={ROTA_CADASTRO_LANCAMENTOS}>
@@ -46,7 +46,8 @@ class Rotas extends React.Component {
       return (
         <Routes>
           <Route path={ROTA_CADASTRO_USUARIOS} element={<Cadastro />} />
-          <Route path={ROTA_LOGIN} element={<Login />} />
+          <Route path={ROTA_LOGIN}
+                 element={<Login setIsUsuarioAutenticado={this.props.setIsUsuarioAutenticado}/>} />
         </Routes>
       );
     }
