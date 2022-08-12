@@ -3,6 +3,7 @@ import NavbarItem from './NavbarItem';
 import {ROTA_CADASTRO_USUARIOS, ROTA_CONSULTA_LANCAMENTOS, ROTA_HOME, ROTA_LOGIN} from '../../utils/constantes';
 import {Link} from 'react-router-dom';
 import AuthService from '../../services/authService/AuthService';
+import PropTypes from 'prop-types';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -27,12 +28,13 @@ class Navbar extends React.Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav">
-                <NavbarItem href={'/'} label={'Home'} />
-                <NavbarItem href={ROTA_CADASTRO_USUARIOS} label={'Usuários'} />
-                <NavbarItem href={ROTA_CONSULTA_LANCAMENTOS} label={'Lançamentos'} />
+                <NavbarItem show href={ROTA_CADASTRO_USUARIOS} label={'Usuários'} />
+                <NavbarItem show={this.props.isUsuarioAutenticado} href={'/'} label={'Home'} />
+                <NavbarItem show={this.props.isUsuarioAutenticado}
+                            href={ROTA_CONSULTA_LANCAMENTOS} label={'Lançamentos'} />
                 {this.props.isUsuarioAutenticado ?
-                  <NavbarItem href={ROTA_LOGIN} label={'Sair'} onClick={this.logout} /> :
-                  <NavbarItem href={ROTA_LOGIN} label={'Login'} />}
+                  <NavbarItem show href={ROTA_LOGIN} label={'Sair'} onClick={this.logout} /> :
+                  <NavbarItem show href={ROTA_LOGIN} label={'Login'} />}
               </ul>
             </div>
           </div>
@@ -42,5 +44,10 @@ class Navbar extends React.Component {
   }
 
 }
+
+Navbar.propTypes = {
+  isUsuarioAutenticado: PropTypes.bool.isRequired,
+  setIsUsuarioAutenticado: PropTypes.func.isRequired,
+};
 
 export default Navbar;
