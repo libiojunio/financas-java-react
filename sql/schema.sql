@@ -11,7 +11,7 @@ nome character varying(150),
 email character varying(100),
 senha character varying(20),
 data_cadastro date default now()
-)
+);
 
 
 CREATE TABLE financas.lancamento
@@ -33,7 +33,7 @@ CREATE TABLE financas.lancamento
     OIDS=FALSE
 );
 
-ALTER TABLE financas.lancamento OWNER TO postgres
+ALTER TABLE financas.lancamento OWNER TO postgres;
 
 
 -- mysql
@@ -48,7 +48,7 @@ create table financas.usuario (
     email varchar(100),
     senha varchar(20),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
+);
 
 CREATE TABLE financas.lancamento
 (
@@ -61,4 +61,4 @@ CREATE TABLE financas.lancamento
     status varchar(20) NOT NULL,
     id_usuario int REFERENCES financas.usuario (id),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
+);
