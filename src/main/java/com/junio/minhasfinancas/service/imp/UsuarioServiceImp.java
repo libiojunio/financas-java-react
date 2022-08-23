@@ -5,8 +5,8 @@ import com.junio.minhasfinancas.exception.RegraNegocioException;
 import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.model.repository.UsuarioRepository;
 import com.junio.minhasfinancas.service.interfaces.UsuarioService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,9 +17,12 @@ public class UsuarioServiceImp implements UsuarioService {
 
   private UsuarioRepository usuarioRepository;
 
+  private PasswordEncoder passwordEncoder;
+
   @Autowired
-  public UsuarioServiceImp(UsuarioRepository usuarioRepository) {
+  public UsuarioServiceImp(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
     super();
+    this.passwordEncoder = passwordEncoder;
     this.usuarioRepository = usuarioRepository;
   }
 
@@ -35,10 +38,10 @@ public class UsuarioServiceImp implements UsuarioService {
       throw new ErroAutenticacao("Usuário não encontrado");
     }
     if (!usuario.get().getEmail().equals(email)) {
-      throw new ErroAutenticacao("email inválido");
+      throw new ErroAutenticacao("email ou senha inválido");
     }
-    if (!usuario.get().getSenha().equals(senha)) {
-      throw new ErroAutenticacao("senha inválida");
+    if (!passwordEncoder.matches(senha, usuario.get().getSenha())) {
+      throw new ErroAutenticacao("email ou senha inválido");
     }
     return usuario.get();
   }
@@ -51,6 +54,7 @@ public class UsuarioServiceImp implements UsuarioService {
   @Transactional
   public Usuario salvarUsuario(Usuario usuario) {
     validarEmail(usuario.getEmail());
+    usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
     return usuarioRepository.save(usuario);
   }
 

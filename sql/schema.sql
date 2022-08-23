@@ -9,7 +9,7 @@ create table financas.usuario (
 id bigserial not null primary key,
 nome character varying(150),
 email character varying(100),
-senha character varying(20),
+senha character varying(255),
 data_cadastro date default now()
 );
 
@@ -46,7 +46,7 @@ create table financas.usuario (
     id int not null primary key AUTO_INCREMENT,
     nome varchar(150),
     email varchar(100),
-    senha varchar(20),
+    senha varchar(255),
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
