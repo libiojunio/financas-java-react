@@ -4,6 +4,7 @@ import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.service.imp.SecurityUserDetailsService;
 import com.junio.minhasfinancas.service.interfaces.JwtService;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,8 +29,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
   @Override
   protected void doFilterInternal(
       HttpServletRequest request,
-      HttpServletResponse response,
-      FilterChain filterChain) throws ServletException, IOException {
+      @NotNull HttpServletResponse response,
+      @NotNull FilterChain filterChain) throws ServletException, IOException {
     String authorization = request.getHeader("Authorization");
     if (authorization != null && authorization.startsWith("Bearer")){
       String token = authorization.split(" ")[1];
