@@ -42,7 +42,7 @@ public class UsuarioResource {
     try {
       Usuario usuario = usuarioService.autenticar(usuarioForm.getEmail(), usuarioForm.getSenha());
       String token = jwtService.gerarToken(usuario);
-      return new ResponseEntity(new Token(usuario.getNome(), token), HttpStatus.OK);
+      return new ResponseEntity(new Token(usuario.getId(),usuario.getNome(), usuario.getEmail(), token), HttpStatus.OK);
     } catch (ErroAutenticacao e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     }

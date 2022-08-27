@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Token {
+  private Long id;
   private String nome;
+  private String email;
   private String token;
 }
