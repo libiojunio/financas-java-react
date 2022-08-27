@@ -3,6 +3,8 @@ package com.junio.minhasfinancas.api.resource.token;
 import com.junio.minhasfinancas.model.entity.Usuario;
 import com.junio.minhasfinancas.service.imp.SecurityUserDetailsService;
 import com.junio.minhasfinancas.service.interfaces.JwtService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,15 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@AllArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
 
+  @Autowired
   private JwtService jwtService;
-  private SecurityUserDetailsService securityUserDetailsService;
 
-  public JwtTokenFilter(JwtService jwtService, SecurityUserDetailsService securityUserDetailsService){
-    this.jwtService = jwtService;
-    this.securityUserDetailsService = securityUserDetailsService;
-  }
+  private SecurityUserDetailsService securityUserDetailsService;
 
   @Override
   protected void doFilterInternal(
