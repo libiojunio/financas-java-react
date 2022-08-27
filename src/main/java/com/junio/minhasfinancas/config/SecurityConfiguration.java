@@ -1,5 +1,7 @@
 package com.junio.minhasfinancas.config;
 
+import com.junio.minhasfinancas.service.imp.SecurityUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+  @Autowired
+  SecurityUserDetailsService securityUserDetailsService;
+
   @Bean
   public PasswordEncoder passwordEncoder () {
     return new BCryptPasswordEncoder();
@@ -20,8 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    String senhaCod = passwordEncoder().encode("qwe123");
-    auth.inMemoryAuthentication().withUser("minhas-financas").password(senhaCod).roles("USER");
+    auth.userDetailsService(securityUserDetailsService).passwordEncoder(passwordEncoder());
   }
 
   @Override

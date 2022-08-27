@@ -1,9 +1,11 @@
 package com.junio.minhasfinancas.api.resource;
 
 import com.junio.minhasfinancas.api.resource.forms.UsuarioForm;
+import com.junio.minhasfinancas.api.resource.token.Token;
 import com.junio.minhasfinancas.exception.ErroAutenticacao;
 import com.junio.minhasfinancas.exception.RegraNegocioException;
 import com.junio.minhasfinancas.model.entity.Usuario;
+import com.junio.minhasfinancas.service.interfaces.JwtService;
 import com.junio.minhasfinancas.service.interfaces.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioResource {
 
   private UsuarioService usuarioService;
+  private JwtService jwtService;
 
   @PostMapping
   public ResponseEntity salvar(@RequestBody UsuarioForm usuarioForm){
@@ -35,10 +38,11 @@ public class UsuarioResource {
   }
 
   @PostMapping("/autenticar")
-  public ResponseEntity autenticar(@RequestBody UsuarioForm usuarioForm){
+  public ResponseEntity<?> autenticar(@RequestBody UsuarioForm usuarioForm){
     try {
       Usuario usuario = usuarioService.autenticar(usuarioForm.getEmail(), usuarioForm.getSenha());
-      return new ResponseEntity(usuario, HttpStatus.OK);
+      String token = jwtService.gerarToken(usuario);
+      return new ResponseEntity(new Token(usuario.getNome(), token), HttpStatus.OK);
     } catch (ErroAutenticacao e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     }
