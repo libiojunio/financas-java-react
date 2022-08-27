@@ -1,5 +1,6 @@
 package com.junio.minhasfinancas.config;
 
+import com.junio.minhasfinancas.api.resource.token.JwtTokenFilter;
 import com.junio.minhasfinancas.service.imp.SecurityUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -21,6 +23,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Bean
   public PasswordEncoder passwordEncoder () {
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  public JwtTokenFilter jwtTokenFilter (){
+    return new JwtTokenFilter(null, securityUserDetailsService);
   }
 
   @Override
@@ -35,6 +42,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
         .anyRequest().authenticated()
         .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and().httpBasic();
+        .and().addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 }
