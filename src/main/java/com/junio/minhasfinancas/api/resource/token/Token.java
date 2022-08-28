@@ -11,5 +11,6 @@ public class Token {
   private Long id;
   private String nome;
   private String email;
+  private String dataHoraExpiracaoToken;
   private String token;
 }

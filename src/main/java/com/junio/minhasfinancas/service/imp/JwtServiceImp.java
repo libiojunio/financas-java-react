@@ -6,13 +6,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Service
@@ -24,19 +24,22 @@ public class JwtServiceImp implements JwtService {
   @Value("${jwt.chave-assinatura}")
   private String chaveAssinatura;
 
+  @Getter
+  public String dataHoraExpiracaoToken;
+
   @Override
   public String gerarToken(Usuario usuario) {
     Long expiracao = Long.valueOf(this.expiracao);
     LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusMinutes(expiracao);
     Instant instant = dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant();
     Date data = Date.from(instant);
-    String horaFormatada = dataHoraExpiracao.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+    this.dataHoraExpiracaoToken = dataHoraExpiracao.toString();
 
     return Jwts.builder()
         .setExpiration(data)
         .setSubject(usuario.getEmail())
         .claim("nome", usuario.getNome())
-        .claim("horaExpiracao", horaFormatada)
+        .claim("dataHoraExpiracaoToken", this.dataHoraExpiracaoToken)
         .signWith(SignatureAlgorithm.HS512, chaveAssinatura)
         .compact();
   }
