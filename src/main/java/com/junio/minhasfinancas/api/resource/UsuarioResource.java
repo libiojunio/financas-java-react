@@ -30,6 +30,7 @@ public class UsuarioResource {
 
     try {
       Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario);
+      usuarioSalvo.setSenha("");
       return new ResponseEntity(usuarioSalvo, HttpStatus.CREATED);
     } catch (RegraNegocioException e) {
       return ResponseEntity.badRequest().body(e.getMessage());
